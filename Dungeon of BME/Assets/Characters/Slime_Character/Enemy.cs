@@ -57,8 +57,17 @@ public class Enemy : MonoBehaviour
         animator.SetTrigger("Idle");
     }
 
+
+
+
+
     public void KonckBack(Vector2 knockback)
     {
         rb.AddForce(knockback);
+    }
+
+    void onHit(float demage){
+        print("hit");
+        Health-=demage;
     }
 }

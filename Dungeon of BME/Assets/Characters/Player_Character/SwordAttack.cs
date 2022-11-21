@@ -8,6 +8,7 @@ public class SwordAttack : MonoBehaviour
     public Collider2D swordCollider;
     Vector2 rightAttackOffset;
     public float demage=3;
+    public float knockbackForce=500f;
 
     // Start is called before the first frame update
     void Start()
@@ -38,15 +39,22 @@ public class SwordAttack : MonoBehaviour
         swordCollider.enabled=false;
     }
 
+
     private void OnTriggerEnter2D(Collider2D other){
-        
+        print(other.tag);
+        //knockback
+        Vector3 parentpos = gameObject.GetComponentInParent<Transform>().position;
 
-        if(other.tag== "Enemy"){
-            Enemy enemy = other.GetComponent<Enemy>();
-            if(enemy!=null){
-                enemy.Health-=demage;
-            }
+        Vector2 direction = (Vector2) (parentpos - other.gameObject.transform.position).normalized;
+        Vector2 knockback = direction * knockbackForce;
 
-        }
+    
+        //message
+        other.SendMessage("onHit", demage);
+
     }
+
+  
+
+
 }
