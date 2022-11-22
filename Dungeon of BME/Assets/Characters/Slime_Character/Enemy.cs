@@ -3,13 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IDamage
 {
+    //basic params 
     Animator animator;
-
-    public float health=1;
-
     Rigidbody2D rb;
+
+    // health 
+    public float health=1;
+    //Attack player params
+    public float knockbackForce=500f;
+    public float damage=3;
+    //movement params 
+    public PalyerDetection detection;
+    public float movementSpeed = 500f;  
+
+    void FixedUpdate(){
+        if(detection.detectedObjs.Count>0){
+            Collider2D detectedObject = detection.detectedObjs[0];
+            Vector2 directionToPlayer = (detectedObject.transform.position - transform.position).normalized;
+            rb.AddForce(directionToPlayer * movementSpeed * Time.deltaTime);
+        }
+    }
+
 
 
     public float Health{
@@ -57,17 +73,35 @@ public class Enemy : MonoBehaviour
         animator.SetTrigger("Idle");
     }
 
-
-
-
-
-    public void KonckBack(Vector2 knockback)
-    {
+    public void onHit(float damage, Vector2 knockback){
+        Health-=damage;
         rb.AddForce(knockback);
     }
 
-    void onHit(float demage){
+
+    public void onHit(float damage){
         print("hit");
-        Health-=demage;
+        Health-=damage;
+    }
+
+
+
+    void OnCollisionEnter2D(Collision2D other){
+        print("player_hit");
+
+        IDamage enemyObject = (IDamage) other.collider.GetComponent<IDamage>();
+
+        if(enemyObject != null){
+            print(other.collider.tag);
+            //knockback
+            Vector3 parentpos = gameObject.GetComponentInParent<Transform>().position;
+
+            Vector2 direction = (Vector2) (other.gameObject.transform.position - parentpos).normalized;
+            Vector2 knockback = direction * knockbackForce;
+
+            enemyObject.onHit(damage, knockback);
+        }
+
     }
 }
+
