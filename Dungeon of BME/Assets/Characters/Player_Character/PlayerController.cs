@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     //movement 
     bool canMove=true;
+    Vector2 pointerInput;
 
     //health 
     public float health=10;
@@ -73,6 +75,7 @@ public class PlayerController : MonoBehaviour, IDamage
         
     }
 
+    //movement of player
     private void FixedUpdate(){
         // move the player, if there is input 
         if(canMove && movementInput!=Vector2.zero){
@@ -91,7 +94,10 @@ public class PlayerController : MonoBehaviour, IDamage
             rb.velocity = Vector2.Lerp(rb.velocity, Vector2.zero, idleFriction);
             IsMoving=false;
         }
+
+
     }
+
 
     //plays death animation 
     private void Defeated(){

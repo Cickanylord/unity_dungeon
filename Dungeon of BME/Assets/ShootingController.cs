@@ -15,10 +15,19 @@ public class ShootingController : MonoBehaviour
     private bool canFire=true;
 
 
+    public Vector2 PointerPos{ get; set;}
+
+
+    
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.visible= false;
+       // Cursor.visible= false;
+       // Cursor.lockState=CursorLockMode.Locked;
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();  
     }
 
@@ -27,7 +36,7 @@ public class ShootingController : MonoBehaviour
     private void FixedUpdate(){
 
         
-        mousePos = mainCam.ScreenToViewportPoint(Input.mousePosition);
+        mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
 
         Vector3 rotation = mousePos - transform.position;
         float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
