@@ -14,8 +14,7 @@ public class ShootingController : MonoBehaviour
 
     private bool canFire=true;
 
-
-    public Vector2 PointerPos{ get; set;}
+    public Animator animator;
 
 
     
@@ -48,11 +47,22 @@ public class ShootingController : MonoBehaviour
                 canFire=true;
                 timer=0;
             }
+        
         }
         
         if (Input.GetKey(KeyCode.Q )&& canFire){
             canFire=false;
             Instantiate(bullet, bulletTransform.position, Quaternion.identity );
+            animator.SetTrigger("Shoot");
+        }
+
+        if (Input.GetKey(KeyCode.R )&& canFire){
+            canFire=false;
+            Instantiate(bullet, bulletTransform.position, Quaternion.Euler(0,0,rotZ) );
+            Instantiate(bullet, bulletTransform.position, Quaternion.Euler(0,0,rotZ) );
+            Instantiate(bullet, bulletTransform.position, Quaternion.Euler(0,0,rotZ) );
+
+            animator.SetTrigger("Shoot");
         }
 
        
@@ -60,6 +70,9 @@ public class ShootingController : MonoBehaviour
 
     }
 
+    public void reload(){
+        canFire=true;
+    }
 
 
 }

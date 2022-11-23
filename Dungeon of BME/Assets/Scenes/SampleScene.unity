@@ -232,33 +232,29 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 226790085585602310, guid: 83339db99e248a4428aa37d69ffb1782, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 226790085585602310, guid: 83339db99e248a4428aa37d69ffb1782, type: 3}
       propertyPath: m_Name
-      value: crossHair
+      value: bow
       objectReference: {fileID: 0}
     - target: {fileID: 1105745546524348526, guid: 83339db99e248a4428aa37d69ffb1782, type: 3}
       propertyPath: m_Name
-      value: WeaponParent
+      value: BowParent
       objectReference: {fileID: 0}
     - target: {fileID: 4463888252876027791, guid: 83339db99e248a4428aa37d69ffb1782, type: 3}
       propertyPath: m_Name
       value: player
       objectReference: {fileID: 0}
-    - target: {fileID: 4883149583978267035, guid: 83339db99e248a4428aa37d69ffb1782, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5991527100775822136, guid: 83339db99e248a4428aa37d69ffb1782, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.367
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 9126192467221552808, guid: 83339db99e248a4428aa37d69ffb1782, type: 3}
       propertyPath: crossHair
       value: 
       objectReference: {fileID: 1923389953}
-    - target: {fileID: 9126192467221552808, guid: 83339db99e248a4428aa37d69ffb1782, type: 3}
-      propertyPath: bulletTransform
-      value: 
-      objectReference: {fileID: 744460882}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83339db99e248a4428aa37d69ffb1782, type: 3}
 --- !u!1001 &331378432
@@ -547,11 +543,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &744460882 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4883149583978267035, guid: 83339db99e248a4428aa37d69ffb1782, type: 3}
-  m_PrefabInstance: {fileID: 62324051}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1214325964
 GameObject:
   m_ObjectHideFlags: 0
