@@ -8,6 +8,8 @@ public class BulletMover : MonoBehaviour{
     public Rigidbody2D rb;
     public float speed =500f;
 
+    public float damage = 3;
+
     // Start is called before the first frame update
     void Start(){
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();  
@@ -22,8 +24,13 @@ public class BulletMover : MonoBehaviour{
 
     private void OnTriggerEnter2D(Collider2D other){
         print("HIT");
+        IDamage enemyObject = (IDamage) other.GetComponent<IDamage>();
         if(other.tag=="Enemy"){
-            Destroy(other.gameObject);
+            enemyObject.onHit(3);
+        }
+
+        if(other.tag=="Wall"){
+            Destroy(this.gameObject);
         }
         
     }

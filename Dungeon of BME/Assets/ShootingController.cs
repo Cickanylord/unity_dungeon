@@ -7,7 +7,6 @@ public class ShootingController : MonoBehaviour
 
     private Vector3 mousePos;
     private Camera mainCam;
-    public GameObject crossHair;
     public GameObject bullet;
     public Transform bulletTransform;
     public float timer;
