@@ -1,4 +1,4 @@
-using System;
+ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour, IDamage
 
     //attack
     public SwordAttack swordAttack;
+    public GameObject sword;
+    Vector2 swordRightAttackOffset;
 
     //movement 
     bool canMove=true;
@@ -59,6 +61,7 @@ public class PlayerController : MonoBehaviour, IDamage
         rb=GetComponent<Rigidbody2D>();
         animator =GetComponent<Animator>();
         spriteRenderer= GetComponent<SpriteRenderer>();
+        swordRightAttackOffset=sword.transform.position;
     }
 
     // Update is called once per frame
@@ -74,9 +77,13 @@ public class PlayerController : MonoBehaviour, IDamage
 
             if(movementInput.x < 0){
                 spriteRenderer.flipX=true;
+                sword.transform.rotation = Quaternion.Euler(0,0,30);
+                sword.transform.localPosition = swordRightAttackOffset;
             }   
             else if(movementInput.x > 0){
                 spriteRenderer.flipX=false;
+                sword.transform.rotation = Quaternion.Euler(0,0,-30);
+                //sword.transform.localPosition = new Vector3(swordRightAttackOffset.x*-1, swordRightAttackOffset.y);
             }
             IsMoving=true;
         }
@@ -86,6 +93,7 @@ public class PlayerController : MonoBehaviour, IDamage
             IsMoving=false;
         }
 
+        //sword placement
 
     }
 

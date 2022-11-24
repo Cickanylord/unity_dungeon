@@ -25,7 +25,7 @@ public class RangedEnemy : MonoBehaviour, IDamage
     bool IsMoving{
         set{
             isMoving = value;
-            animator.SetBool("isMoving", isMoving);
+            //animator.SetBool("isMoving", isMoving);
         }
     }
 
