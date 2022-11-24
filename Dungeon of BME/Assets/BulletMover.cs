@@ -10,6 +10,10 @@ public class BulletMover : MonoBehaviour{
 
     public float damage = 3;
 
+    public string targetTag="Enemy";
+
+    public float knockbackForce=500f;
+
     // Start is called before the first frame update
     void Start(){
         /*
@@ -26,10 +30,15 @@ public class BulletMover : MonoBehaviour{
 
 
     private void OnTriggerEnter2D(Collider2D other){
-        print("HIT");
         IDamage enemyObject = (IDamage) other.GetComponent<IDamage>();
-        if(other.tag=="Enemy"){
-            enemyObject.onHit(3);
+        if(other.tag==targetTag){
+            print(other.tag);
+            //knockback
+            Vector3 parentpos = gameObject.GetComponentInParent<Transform>().position;
+            Vector2 direction = (Vector2) (other.gameObject.transform.position - parentpos).normalized;
+
+            enemyObject.onHit(3,direction*knockbackForce);
+            Destroy(this.gameObject);
         }
 
         if(other.tag=="Wall"){

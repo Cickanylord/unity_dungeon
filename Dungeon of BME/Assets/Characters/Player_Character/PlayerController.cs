@@ -45,10 +45,12 @@ public class PlayerController : MonoBehaviour, IDamage
             health =value;
             print(health);
                 if(health<=0){
+                    print("player "+ health);
                     Defeated();
-                }else{
+                }
+                else{
                     //animator.SetTrigger("Demaged");
-            }         
+                }         
         }
         get{
                 
@@ -61,7 +63,9 @@ public class PlayerController : MonoBehaviour, IDamage
         rb=GetComponent<Rigidbody2D>();
         animator =GetComponent<Animator>();
         spriteRenderer= GetComponent<SpriteRenderer>();
-        swordRightAttackOffset=sword.transform.position;
+        swordRightAttackOffset=sword.transform.localPosition;
+        //print("original: "+sword.transform.localPosition);
+
     }
 
     // Update is called once per frame
@@ -77,13 +81,17 @@ public class PlayerController : MonoBehaviour, IDamage
 
             if(movementInput.x < 0){
                 spriteRenderer.flipX=true;
+                //sword placement
                 sword.transform.rotation = Quaternion.Euler(0,0,30);
-                sword.transform.localPosition = swordRightAttackOffset;
+                sword.transform.localPosition = new Vector3(swordRightAttackOffset.x*-1, swordRightAttackOffset.y);
+                //print("right: "+sword.transform.localPosition);
             }   
             else if(movementInput.x > 0){
                 spriteRenderer.flipX=false;
+                //sword placement
                 sword.transform.rotation = Quaternion.Euler(0,0,-30);
-                //sword.transform.localPosition = new Vector3(swordRightAttackOffset.x*-1, swordRightAttackOffset.y);
+                sword.transform.localPosition = swordRightAttackOffset;
+                //print("left: "+sword.transform.localPosition);
             }
             IsMoving=true;
         }
@@ -92,8 +100,6 @@ public class PlayerController : MonoBehaviour, IDamage
             rb.velocity = Vector2.Lerp(rb.velocity, Vector2.zero, idleFriction);
             IsMoving=false;
         }
-
-        //sword placement
 
     }
 
@@ -116,7 +122,10 @@ public class PlayerController : MonoBehaviour, IDamage
     //Attack functions
     //plays attack animation  
     void OnFire(){
-        animator.SetTrigger("swordAttack");
+        if(sword.activeSelf){
+            animator.SetTrigger("swordAttack");
+            sword.GetComponent<SpriteRenderer>().enabled=false;
+        }
     }
 
     //triggered by the animation, decide which way the player attacks  
@@ -133,7 +142,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public void EndSwordAttck(){
         UNLockMovement();
         swordAttack.AttackStop();
-
+        sword.GetComponent<SpriteRenderer>().enabled=true;
     }
     //Locks the player movement while attacking 
     public void LockMovement(){

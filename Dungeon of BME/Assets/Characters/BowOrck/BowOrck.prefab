@@ -349,7 +349,7 @@ Animator:
   m_GameObject: {fileID: 7195878047580066177}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 80f1b43a68776644e8af2a6bcc99a1ab, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -395,6 +395,8 @@ MonoBehaviour:
   health: 1
   knockbackForce: 500
   damage: 3
+  fireRate: 0.5
   detection: {fileID: 8623268761499456524}
   movementSpeed: 500
   bullet: {fileID: 2078598237022014755, guid: dad0f8a4eadf52b4787eb21936c12c68, type: 3}
+  tartgatTag: Player

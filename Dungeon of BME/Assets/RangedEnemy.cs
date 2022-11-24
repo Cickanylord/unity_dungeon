@@ -15,17 +15,23 @@ public class RangedEnemy : MonoBehaviour, IDamage
     //Attack player params
     public float knockbackForce=500f;
     public float damage=3;
+    public float fireRate = 0.5f;
+    private float nextFire = 0.0f;
+
+
     //movement params 
     public PalyerDetection detection;
     public float movementSpeed = 500f;  
     public GameObject bullet;
+
+    public string tartgatTag="Player";
 
 
     bool isMoving = false;
     bool IsMoving{
         set{
             isMoving = value;
-            //animator.SetBool("isMoving", isMoving);
+            animator.SetBool("isMoving", isMoving);
         }
     }
 
@@ -34,8 +40,10 @@ public class RangedEnemy : MonoBehaviour, IDamage
             Collider2D detectedObject = detection.detectedObjs[0];
             Vector2 directionToPlayer = (detectedObject.transform.position - transform.position).normalized;
             //rb.AddForce(directionToPlayer * movementSpeed * Time.deltaTime);
-            ShootArrowAtPlayer(directionToPlayer);
 
+            if(Time.time > nextFire){
+                ShootArrowAtPlayer(directionToPlayer);
+            }
             if(directionToPlayer.x < 0){
                 spriteRenderer.flipX=true;
             }   
@@ -58,10 +66,9 @@ public class RangedEnemy : MonoBehaviour, IDamage
            
             print("hit");
             if(health<=0){
-
                 Defeated();
             }else{
-                 animator.SetTrigger("Demaged");
+                animator.SetTrigger("Demaged");
             }
             
         }
@@ -120,7 +127,6 @@ public class RangedEnemy : MonoBehaviour, IDamage
             print(other.collider.tag);
             //knockback
             Vector3 parentpos = gameObject.GetComponentInParent<Transform>().position;
-
             Vector2 direction = (Vector2) (other.gameObject.transform.position - parentpos).normalized;
             Vector2 knockback = direction * knockbackForce;
 
@@ -130,12 +136,21 @@ public class RangedEnemy : MonoBehaviour, IDamage
     }
 
     private void ShootArrowAtPlayer(Vector2 direction){
-        GameObject clone = Instantiate(bullet,transform.parent) ;
+        
+        nextFire = Time.time + fireRate;
+        GameObject clone = Instantiate(bullet,transform.position, transform.rotation);
+        BulletMover bulletMover= clone.GetComponent<BulletMover>();
+        bulletMover.targetTag = "Player";
         Rigidbody2D rb = clone.GetComponent<Rigidbody2D>();
         Vector2 arrowDir = new Vector2( direction.x , direction.y ).normalized * 1 ;
         rb.velocity = arrowDir;
-        //clone.transform.rotation = Quaternion.Euler(0,0,directio + 180);
-
+        float rotZ = Mathf.Atan2(arrowDir.y, arrowDir.x) * Mathf.Rad2Deg;
+        
+        clone.transform.rotation = Quaternion.Euler(0,0,rotZ);
+        
     }
+
+
+
 }
 
