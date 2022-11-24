@@ -22,15 +22,6 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
-
-/*
-    // params for casting 
-    public ContactFilter2D movmentFilter;
-    List<RaycastHit2D> castCollisions=new List<RaycastHit2D>();
-    
-    public float collisionOffset = 0.05f;
-    */
-
     SpriteRenderer spriteRenderer;
 
     //Animation

@@ -15,6 +15,7 @@ public class ShootingController : MonoBehaviour
     private bool canFire=true;
 
     public Animator animator;
+    private float rotZ;
 
 
     
@@ -36,7 +37,7 @@ public class ShootingController : MonoBehaviour
 
         
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-
+        
         Vector3 rotation = mousePos - transform.position;
         float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0,0,rotZ);
@@ -52,15 +53,17 @@ public class ShootingController : MonoBehaviour
         
         if (Input.GetKey(KeyCode.Q )&& canFire){
             canFire=false;
-            Instantiate(bullet, bulletTransform.position, Quaternion.identity );
+            ShootArrow(0);
             animator.SetTrigger("Shoot");
         }
 
+        //special bullet 
         if (Input.GetKey(KeyCode.R )&& canFire){
             canFire=false;
-            Instantiate(bullet, bulletTransform.position, Quaternion.Euler(0,0,rotZ) );
-            Instantiate(bullet, bulletTransform.position, Quaternion.Euler(0,0,rotZ) );
-            Instantiate(bullet, bulletTransform.position, Quaternion.Euler(0,0,rotZ) );
+            
+            ShootArrow(30);
+            ShootArrow(0);
+            ShootArrow(-30);
 
             animator.SetTrigger("Shoot");
         }
@@ -73,6 +76,30 @@ public class ShootingController : MonoBehaviour
     public void reload(){
         canFire=true;
     }
+
+    private void ShootArrow(float dif){
+        Vector3 MousePosDiff = new Vector3(mousePos.x, mousePos.y, mousePos.z);
+        Vector3 direction = MousePosDiff - transform.position;
+        Vector3 rotation = transform.position - MousePosDiff;
+
+        GameObject clone = Instantiate(bullet, bulletTransform.position, Quaternion.Euler(0,0,rotZ) );
+        Rigidbody2D rb = clone.GetComponent<Rigidbody2D>();
+            
+
+        float rot= Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;   
+
+        Vector2 arrowDir= new Vector2( direction.x , direction.y ).normalized * 1 ;
+        
+        rb.velocity = Quaternion.Euler(0,0,dif) * arrowDir;
+       //rb.velocity =  arrowDir * Quaternion.Euler(0,0,rot + 180 +dif); Ezt a rakos szart....
+        print("arrow"+direction.x +" "+ direction.y);
+
+        clone.transform.rotation = Quaternion.Euler(0,0,rot + 180 +dif);
+
+    }
+
+
+     
 
 
 }

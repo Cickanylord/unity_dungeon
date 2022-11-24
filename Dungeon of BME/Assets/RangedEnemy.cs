@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IDamage
+public class RangedEnemy : MonoBehaviour, IDamage
 {
     //basic params 
     Animator animator;
@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour, IDamage
     //movement params 
     public PalyerDetection detection;
     public float movementSpeed = 500f;  
+    public GameObject bullet;
 
 
     bool isMoving = false;
@@ -32,8 +33,8 @@ public class Enemy : MonoBehaviour, IDamage
         if(detection.detectedObjs.Count>0){
             Collider2D detectedObject = detection.detectedObjs[0];
             Vector2 directionToPlayer = (detectedObject.transform.position - transform.position).normalized;
-            rb.AddForce(directionToPlayer * movementSpeed * Time.deltaTime);
-
+            //rb.AddForce(directionToPlayer * movementSpeed * Time.deltaTime);
+            ShootArrowAtPlayer(directionToPlayer);
 
             if(directionToPlayer.x < 0){
                 spriteRenderer.flipX=true;
@@ -125,6 +126,15 @@ public class Enemy : MonoBehaviour, IDamage
 
             enemyObject.onHit(damage, knockback);
         }
+
+    }
+
+    private void ShootArrowAtPlayer(Vector2 direction){
+        GameObject clone = Instantiate(bullet,transform.parent) ;
+        Rigidbody2D rb = clone.GetComponent<Rigidbody2D>();
+        Vector2 arrowDir = new Vector2( direction.x , direction.y ).normalized * 1 ;
+        rb.velocity = arrowDir;
+        //clone.transform.rotation = Quaternion.Euler(0,0,directio + 180);
 
     }
 }

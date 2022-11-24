@@ -12,7 +12,7 @@ public class BulletMover : MonoBehaviour{
 
     // Start is called before the first frame update
     void Start(){
-        
+        /*
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();  
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
         Vector3 direction = mousePos - transform.position;
@@ -21,7 +21,7 @@ public class BulletMover : MonoBehaviour{
 
         rb.velocity = new Vector2( direction.x, direction.y).normalized * speed;
         transform.rotation = Quaternion.Euler(0,0,rot+180);
-         
+         */
     }
 
 
