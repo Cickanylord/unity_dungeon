@@ -9,6 +9,26 @@ public class PlayerController : MonoBehaviour, IDamage
 
     //movement params 
     Vector2 movementInput;
+
+    public Vector2 MovementInput{
+        get{
+            return movementInput;
+        }
+    }
+
+    public int mana = 10;
+
+    public int Mana{
+        set{
+            mana = value; 
+        }
+
+        get{
+            return mana;
+        }
+    } 
+
+
     Rigidbody2D rb;
     public float movementSpeed = 150f;
     public float maxSpeed = 8f;
@@ -21,6 +41,8 @@ public class PlayerController : MonoBehaviour, IDamage
             animator.SetBool("isMoving", isMoving);
         }
     }
+
+
 
     SpriteRenderer spriteRenderer;
 

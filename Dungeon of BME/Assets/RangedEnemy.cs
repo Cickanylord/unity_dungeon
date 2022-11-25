@@ -20,11 +20,14 @@ public class RangedEnemy : MonoBehaviour, IDamage
 
 
     //movement params 
-    public PalyerDetection detection;
+    public PalyerDetection aim;
+    public PalyerDetection move;
+
     public float movementSpeed = 500f;  
     public GameObject bullet;
 
-    public string tartgatTag="Player";
+    public string targetTag="Player";
+    public Transform bowParent;
 
 
     bool isMoving = false;
@@ -36,23 +39,39 @@ public class RangedEnemy : MonoBehaviour, IDamage
     }
 
     void FixedUpdate(){
-        if(detection.detectedObjs.Count>0){
-            Collider2D detectedObject = detection.detectedObjs[0];
+        
+        if(move.detectedObjs.Count>0){
+            Collider2D detectedObject = move.detectedObjs[0];
             Vector2 directionToPlayer = (detectedObject.transform.position - transform.position).normalized;
-            //rb.AddForce(directionToPlayer * movementSpeed * Time.deltaTime);
 
-            if(Time.time > nextFire){
-                ShootArrowAtPlayer(directionToPlayer);
-            }
-            if(directionToPlayer.x < 0){
-                spriteRenderer.flipX=true;
-            }   
-            else if(directionToPlayer.x > 0){
-                spriteRenderer.flipX=false;
-            }
+            float rotZ = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
+            bowParent.rotation =  Quaternion.Euler(0,0,rotZ);
+        
 
-            IsMoving=true;
+            if(aim.detectedObjs.Count>0){
+                if(Time.time > nextFire){
+                    ShootArrowAtPlayer(directionToPlayer);
+                }
+                if(directionToPlayer.x < 0){
+                    spriteRenderer.flipX=true;
+                }   
+                else if(directionToPlayer.x > 0){
+                    spriteRenderer.flipX=false;
+                }
+
+                
+            }
+       
+        
+            if(move.detectedObjs.Count>0 && aim.detectedObjs.Count == 0){
+                rb.AddForce(directionToPlayer * movementSpeed * Time.deltaTime);
+                IsMoving=true;
+            }
+            else{
+                IsMoving=false;
+            }
         }
+
         else{
             IsMoving=false;
         }
@@ -112,18 +131,19 @@ public class RangedEnemy : MonoBehaviour, IDamage
 
 
     public void onHit(float damage){
-        print("hit");
+        //print("hit");
         Health-=damage;
     }
 
 
 
     void OnCollisionEnter2D(Collision2D other){
-        print("player_hit");
+       // print("player_hit");
 
         IDamage enemyObject = (IDamage) other.collider.GetComponent<IDamage>();
 
         if(enemyObject != null){
+            if(other.collider.tag==targetTag){
             print(other.collider.tag);
             //knockback
             Vector3 parentpos = gameObject.GetComponentInParent<Transform>().position;
@@ -131,6 +151,7 @@ public class RangedEnemy : MonoBehaviour, IDamage
             Vector2 knockback = direction * knockbackForce;
 
             enemyObject.onHit(damage, knockback);
+            }
         }
 
     }
@@ -140,11 +161,14 @@ public class RangedEnemy : MonoBehaviour, IDamage
         nextFire = Time.time + fireRate;
         GameObject clone = Instantiate(bullet,transform.position, transform.rotation);
         BulletMover bulletMover= clone.GetComponent<BulletMover>();
-        bulletMover.targetTag = "Player";
+        bulletMover.targetTag = targetTag;
         Rigidbody2D rb = clone.GetComponent<Rigidbody2D>();
         Vector2 arrowDir = new Vector2( direction.x , direction.y ).normalized * 1 ;
         rb.velocity = arrowDir;
         float rotZ = Mathf.Atan2(arrowDir.y, arrowDir.x) * Mathf.Rad2Deg;
+
+
+
         
         clone.transform.rotation = Quaternion.Euler(0,0,rotZ);
         

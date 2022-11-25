@@ -2,45 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootingController : MonoBehaviour
+public class ShootWand : MonoBehaviour
 {
-
+    public PlayerController playerController;
     private Vector3 mousePos;
     private Camera mainCam;
     public GameObject bullet;
     public Transform bulletTransform;
     public float timer;
     public float fireRate;
+    Vector2 wandRightAttackOffset;
+    Vector2 movementInput;
+
 
     private bool canFire=true;
 
-    public Animator animator;
+    //public Animator animator;
     private float rotZ;
-
-
-    
-
-
-
-
     // Start is called before the first frame update
     void Start()
     {
-       // Cursor.visible= false;
-       // Cursor.lockState=CursorLockMode.Locked;
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();  
+        wandRightAttackOffset = transform.localPosition;
     }
 
-
     // Update is called once per frame
-    private void FixedUpdate(){
+        private void Update(){
 
-        
+        movementInput = playerController.MovementInput;
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
         
         Vector3 rotation = mousePos - transform.position;
         float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0,0,rotZ);
+        //transform.rotation = Quaternion.Euler(0,0,rotZ);
 
         if(!canFire){
             timer += Time.deltaTime;
@@ -48,26 +42,38 @@ public class ShootingController : MonoBehaviour
                 canFire=true;
                 timer=0;
             }
-        
         }
         
-        if (Input.GetKey(KeyCode.Q )&& canFire){
+        if (Input.GetKey(KeyCode.Q )&& canFire && playerController.Mana > 0){
+            playerController.Mana -= 2;
             canFire=false;
             ShootArrow(0);
-            animator.SetTrigger("Shoot");
+            //animator.SetTrigger("Shoot");
         }
 
         //special bullet 
-        if (Input.GetKey(KeyCode.R )&& canFire){
+        if (Input.GetKey(KeyCode.R )&& canFire && playerController.Mana > 0){
             canFire=false;
-            
+            playerController.Mana -= 5;
             ShootArrow(30);
             ShootArrow(0);
             ShootArrow(-30);
 
-            animator.SetTrigger("Shoot");
+            //animator.SetTrigger("Shoot");
         }
+
+        if(movementInput.x < 0){
+        transform.rotation = Quaternion.Euler(0,0,30);
+        transform.localPosition = new Vector3(wandRightAttackOffset.x*-1, wandRightAttackOffset.y);
+        }
+
+        else if(movementInput.x > 0){
+            transform.rotation = Quaternion.Euler(0,0,-30);
+            transform.localPosition = wandRightAttackOffset;
+        }
+
     }
+    
 
     public void reload(){
         canFire=true;
@@ -93,9 +99,4 @@ public class ShootingController : MonoBehaviour
         clone.transform.rotation = Quaternion.Euler(0,0,rot + 180 +dif);
 
     }
-
-
-     
-
-
 }
