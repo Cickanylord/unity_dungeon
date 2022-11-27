@@ -1,4 +1,4 @@
- using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +16,9 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
+    //mana
     public int mana = 10;
+    public ManaBar manabar;
 
     public int Mana{
         set{
@@ -61,6 +63,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     //health 
     public float health=10;
+    public HealthBar healthbar;
 
     public float Health{
         set{
@@ -82,6 +85,8 @@ public class PlayerController : MonoBehaviour, IDamage
 
     //initialize player components
     void Start(){
+        Health = health;
+        Mana = mana;
         rb=GetComponent<Rigidbody2D>();
         animator =GetComponent<Animator>();
         spriteRenderer= GetComponent<SpriteRenderer>();
@@ -180,6 +185,7 @@ public class PlayerController : MonoBehaviour, IDamage
     //Get damage functions 
     public void onHit(float damage, Vector2 knockback){
         Health-=damage;
+        healthbar.SetHealth(Health);
         rb.AddForce(knockback);
     }
 
