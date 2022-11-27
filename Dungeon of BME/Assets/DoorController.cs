@@ -2,18 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChestController : MonoBehaviour
+public class DoorController : MonoBehaviour
 {
 
     public bool isOpen;
     private Animator animator;
-    private BoxCollider2D col;
+    public string keyTag;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-        col = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -22,14 +21,19 @@ public class ChestController : MonoBehaviour
         
     }
 
-    public void OpenChest()
+    public void OpenDoor()
     {
-        if(!isOpen)
-        {
+        bool hasKey = false;
+        GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
+        for (int i = 0; i < inventory.transform.childCount; i++){
+            if(inventory.transform.GetChild(i).gameObject.CompareTag(keyTag)){
+                hasKey = true;
+            }
+        }
+        if(hasKey){
             isOpen = true;
             animator.SetBool("isOpen", isOpen);
-            col.size = new Vector2(0.3167033f, 0.2551677f);
-            col.offset = new Vector2(-0.001648307f, -0.01648343f);
         }
     }
+
 }
