@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Wall
+  - weapon
+  - Inventory
+  - GreenKey
   layers:
   - Default
   - TransparentFX
