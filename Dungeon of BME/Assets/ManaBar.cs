@@ -15,6 +15,8 @@ public class ManaBar : MonoBehaviour
 
     public void SetMana(float mana)
     {
+        if(mana < 0)
+            mana = 0;
         slider.value = mana;
     }
 }

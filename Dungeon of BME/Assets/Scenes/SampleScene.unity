@@ -275,6 +275,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1048801388}
     - target: {fileID: 8187020142005799289, guid: 83339db99e248a4428aa37d69ffb1782, type: 3}
+      propertyPath: manabar
+      value: 
+      objectReference: {fileID: 892403135}
+    - target: {fileID: 8187020142005799289, guid: 83339db99e248a4428aa37d69ffb1782, type: 3}
       propertyPath: healthbar
       value: 
       objectReference: {fileID: 897016369}
@@ -1143,7 +1147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4068817fc7c624e44b00e35c644b131e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 0}
+  slider: {fileID: 892403136}
 --- !u!114 &892403136
 MonoBehaviour:
   m_ObjectHideFlags: 0

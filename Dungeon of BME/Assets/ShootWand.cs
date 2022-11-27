@@ -44,16 +44,17 @@ public class ShootWand : MonoBehaviour
             }
         }
         
-        if (Input.GetKey(KeyCode.Q )&& canFire && playerController.Mana > 0){
+        if (Input.GetKey(KeyCode.Q )&& canFire && playerController.Mana >= 2){
             playerController.Mana -= 2;
             playerController.manabar.SetMana(playerController.Mana);
             canFire =false;
             ShootArrow(0);
+
             animator.SetTrigger("Shoot");
         }
 
         //special bullet 
-        if (Input.GetKey(KeyCode.R )&& canFire && playerController.Mana > 0){
+        if (Input.GetKey(KeyCode.R )&& canFire && playerController.Mana >= 5){
             canFire=false;
             playerController.Mana -= 5;
             playerController.manabar.SetMana(playerController.Mana);
