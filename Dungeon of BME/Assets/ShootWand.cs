@@ -46,7 +46,6 @@ public class ShootWand : MonoBehaviour
         
         if (Input.GetKey(KeyCode.Q )&& canFire && playerController.Mana >= 2){
             playerController.Mana -= 2;
-            playerController.manabar.SetMana(playerController.Mana);
             canFire =false;
             ShootArrow(0);
 
@@ -57,7 +56,6 @@ public class ShootWand : MonoBehaviour
         if (Input.GetKey(KeyCode.R )&& canFire && playerController.Mana >= 5){
             canFire=false;
             playerController.Mana -= 5;
-            playerController.manabar.SetMana(playerController.Mana);
             ShootArrow(30);
             ShootArrow(0);
             ShootArrow(-30);

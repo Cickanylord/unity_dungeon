@@ -277,7 +277,7 @@ PrefabInstance:
     - target: {fileID: 8187020142005799289, guid: 83339db99e248a4428aa37d69ffb1782, type: 3}
       propertyPath: manabar
       value: 
-      objectReference: {fileID: 892403135}
+      objectReference: {fileID: 892403137}
     - target: {fileID: 8187020142005799289, guid: 83339db99e248a4428aa37d69ffb1782, type: 3}
       propertyPath: healthbar
       value: 
@@ -720,6 +720,7 @@ GameObject:
   - component: {fileID: 493380455}
   - component: {fileID: 493380457}
   - component: {fileID: 493380456}
+  - component: {fileID: 493380458}
   m_Layer: 5
   m_Name: Mana
   m_TagString: Untagged
@@ -785,6 +786,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 493380454}
   m_CullTransparentMesh: 1
+--- !u!114 &493380458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493380454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8821ca8182a46f541b85bf86e25120af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1104,7 +1118,7 @@ GameObject:
   m_Component:
   - component: {fileID: 892403134}
   - component: {fileID: 892403136}
-  - component: {fileID: 892403135}
+  - component: {fileID: 892403137}
   m_Layer: 5
   m_Name: Mana bar
   m_TagString: Untagged
@@ -1132,22 +1146,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -468.41, y: 234.9}
+  m_AnchoredPosition: {x: -468.41, y: 186}
   m_SizeDelta: {x: 145, y: 14}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &892403135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 892403133}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4068817fc7c624e44b00e35c644b131e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 892403136}
 --- !u!114 &892403136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1199,6 +1200,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &892403137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 892403133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8821ca8182a46f541b85bf86e25120af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 892403136}
 --- !u!1 &896669949
 GameObject:
   m_ObjectHideFlags: 0
@@ -1305,7 +1319,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -468.4075, y: 254.14136}
+  m_AnchoredPosition: {x: -468.41, y: 211.7}
   m_SizeDelta: {x: 145, y: 14}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &897016369

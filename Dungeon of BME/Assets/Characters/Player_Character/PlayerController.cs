@@ -18,11 +18,12 @@ public class PlayerController : MonoBehaviour, IDamage
 
     //mana
     public int mana = 10;
-    public ManaBar manabar;
+    public ValueBar manabar;
 
     public int Mana{
         set{
-            mana = value; 
+            mana = value;
+            manabar.SetValue(Mana);
         }
 
         get{
@@ -63,11 +64,12 @@ public class PlayerController : MonoBehaviour, IDamage
 
     //health 
     public float health=10;
-    public HealthBar healthbar;
+    public ValueBar healthbar;
 
     public float Health{
         set{
             health =value;
+            healthbar.SetValue(Health);
             print(health);
                 if(health<=0){
                     print("player "+ health);
@@ -85,8 +87,6 @@ public class PlayerController : MonoBehaviour, IDamage
 
     //initialize player components
     void Start(){
-        Health = health;
-        Mana = mana;
         rb=GetComponent<Rigidbody2D>();
         animator =GetComponent<Animator>();
         spriteRenderer= GetComponent<SpriteRenderer>();
@@ -185,7 +185,6 @@ public class PlayerController : MonoBehaviour, IDamage
     //Get damage functions 
     public void onHit(float damage, Vector2 knockback){
         Health-=damage;
-        healthbar.SetHealth(Health);
         rb.AddForce(knockback);
     }
 
