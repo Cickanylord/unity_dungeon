@@ -35,10 +35,12 @@ public class PlayerController : MonoBehaviour, IDamage
     //health 
     float maxHealth;
     public float health=10;
+    public ValueBar healthbar;
 
     public float Health{
         set{
             health =value;
+            healthbar.SetValue(Health);
             //print(health);
                 if(health<=0){
                     print("player "+ health);
@@ -51,12 +53,16 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
+
+    //mana
     private int maxMana; 
     public int mana = 10;
+    public ValueBar manabar;
 
     public int Mana{
         set{
-            mana = value; 
+            mana = value;
+            manabar.SetValue(Mana);
         }
 
         get{
