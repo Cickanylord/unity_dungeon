@@ -17,7 +17,7 @@ public class ShootWand : MonoBehaviour
 
     private bool canFire=true;
 
-    //public Animator animator;
+    public Animator animator;
     private float rotZ;
     // Start is called before the first frame update
     void Start()
@@ -44,22 +44,23 @@ public class ShootWand : MonoBehaviour
             }
         }
         
-        if (Input.GetKey(KeyCode.Q )&& canFire && playerController.Mana > 0){
+        if (Input.GetKey(KeyCode.Q )&& canFire && playerController.Mana >= 2){
             playerController.Mana -= 2;
-            canFire=false;
+            canFire =false;
             ShootArrow(0);
-            //animator.SetTrigger("Shoot");
+
+            animator.SetTrigger("Shoot");
         }
 
         //special bullet 
-        if (Input.GetKey(KeyCode.R )&& canFire && playerController.Mana > 0){
+        if (Input.GetKey(KeyCode.R )&& canFire && playerController.Mana >= 5){
             canFire=false;
             playerController.Mana -= 5;
             ShootArrow(30);
             ShootArrow(0);
             ShootArrow(-30);
 
-            //animator.SetTrigger("Shoot");
+            animator.SetTrigger("Shoot");
         }
 
         if(movementInput.x < 0){
