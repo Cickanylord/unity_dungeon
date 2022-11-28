@@ -48,7 +48,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1.5
 --- !u!114 &6477610518561649134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,8 +336,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.1133096}
-  m_Size: {x: 0.11187033, y: 0.11187033}
+  m_Offset: {x: 0, y: -0.11330963}
+  m_Size: {x: 0.11187034, y: 0.11187034}
   m_Direction: 0
 --- !u!95 &2455069117866994036
 Animator:
@@ -371,11 +371,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e33aaa3b9b3eca64d814933446454c1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
   knockbackForce: 500
   damage: 3
   detection: {fileID: 6477610518561649134}
   movementSpeed: 500
+  health: 1
 --- !u!50 &569071079299842168
 Rigidbody2D:
   serializedVersion: 4

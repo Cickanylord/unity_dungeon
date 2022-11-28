@@ -36,4 +36,10 @@ public class DoorController : MonoBehaviour
         }
     }
 
+    public void TeleportPlayer(){
+        GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
+        GameObject[] spawnpoint = GameObject.FindGameObjectsWithTag("Spawn2");
+        player[0].transform.position = spawnpoint[0].transform.position;
+    }
+
 }

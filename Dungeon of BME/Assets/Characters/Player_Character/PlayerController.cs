@@ -15,7 +15,43 @@ public class PlayerController : MonoBehaviour, IDamage
             return movementInput;
         }
     }
+    public float movementSpeed = 150f;
+    public float maxSpeed = 8f;
+    public float idleFriction = 0.9f;
+    SpriteRenderer spriteRenderer;
 
+    //Animation
+    Animator animator;
+
+    Rigidbody2D rb;
+    Collider2D col;
+    GameObject[] enemies;
+
+    //attack
+    public SwordAttack swordAttack;
+    public GameObject sword;
+    Vector2 swordRightAttackOffset;
+
+    //health 
+    float maxHealth;
+    public float health=10;
+
+    public float Health{
+        set{
+            health =value;
+            //print(health);
+                if(health<=0){
+                    print("player "+ health);
+                    Defeated();
+                }     
+        }
+        get{
+                
+            return health;
+        }
+    }
+
+    private int maxMana; 
     public int mana = 10;
 
     public int Mana{
@@ -28,12 +64,8 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     } 
 
-
-    Rigidbody2D rb;
-    public float movementSpeed = 150f;
-    public float maxSpeed = 8f;
-    public float idleFriction = 0.9f;
-
+    //movement 
+    bool canMove=true;
     bool isMoving = false;
     bool IsMoving{
         set{
@@ -42,52 +74,17 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
-
-
-    SpriteRenderer spriteRenderer;
-
-    //Animation
-    Animator animator;
-    
-
-    //attack
-    public SwordAttack swordAttack;
-    public GameObject sword;
-    Vector2 swordRightAttackOffset;
-
-    //movement 
-    bool canMove=true;
-    Vector2 pointerInput;
-
-    //health 
-    public float health=10;
-
-    public float Health{
-        set{
-            health =value;
-            print(health);
-                if(health<=0){
-                    print("player "+ health);
-                    Defeated();
-                }
-                else{
-                    //animator.SetTrigger("Demaged");
-                }         
-        }
-        get{
-                
-            return health;
-        }
-    }
-
     //initialize player components
     void Start(){
-        rb=GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<Collider2D>();
         animator =GetComponent<Animator>();
         spriteRenderer= GetComponent<SpriteRenderer>();
         swordRightAttackOffset=sword.transform.localPosition;
         //print("original: "+sword.transform.localPosition);
-
+        maxHealth = Health;
+        maxMana = Mana;
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
     }
 
     // Update is called once per frame
@@ -129,6 +126,7 @@ public class PlayerController : MonoBehaviour, IDamage
     //plays death animation 
     private void Defeated(){
         LockMovement();
+        col.enabled= false;
         animator.SetTrigger("Defeated");
     }
     //After death animation finished deletes the object 
@@ -180,7 +178,8 @@ public class PlayerController : MonoBehaviour, IDamage
     //Get damage functions 
     public void onHit(float damage, Vector2 knockback){
         Health-=damage;
-        rb.AddForce(knockback);
+        if(Health>0)
+            rb.AddForce(knockback);
     }
 
 
@@ -188,4 +187,22 @@ public class PlayerController : MonoBehaviour, IDamage
         print("hit");
         Health-=damage;
     }
+
+    public void ResPawn(){
+        transform.position = new Vector3(0,0,0);
+        Health = maxHealth;
+        mana = maxMana;
+        animator.SetTrigger("Respawn");
+        canMove=true;
+        col.enabled= true;
+
+        foreach (var enemy in enemies){
+            IDamage enemyObject = (IDamage) enemy.GetComponent<IDamage>();
+            enemyObject.ResPawn();
+            print("reses");
+        }
+
+    }
+
+
 }

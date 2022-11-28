@@ -42,6 +42,7 @@ public class RangedEnemy : MonoBehaviour, IDamage
         
         if(move.detectedObjs.Count>0){
             Collider2D detectedObject = move.detectedObjs[0];
+
             Vector2 directionToPlayer = (detectedObject.transform.position - transform.position).normalized;
 
             float rotZ = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
@@ -126,7 +127,8 @@ public class RangedEnemy : MonoBehaviour, IDamage
 
     public void onHit(float damage, Vector2 knockback){
         Health-=damage;
-        rb.AddForce(knockback);
+        if(Health>0)
+            rb.AddForce(knockback);
     }
 
 
@@ -171,6 +173,11 @@ public class RangedEnemy : MonoBehaviour, IDamage
 
         
         clone.transform.rotation = Quaternion.Euler(0,0,rotZ);
+        
+    }
+
+
+    public void ResPawn(){
         
     }
 
