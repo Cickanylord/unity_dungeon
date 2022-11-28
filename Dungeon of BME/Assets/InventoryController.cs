@@ -6,6 +6,8 @@ using UnityEngine;
 public class InventoryController : MonoBehaviour{
 
     public int selectedWeapon = 0;
+    public int weaponCount = 3;
+    public GameObject greenKey;
 
     // Start is called before the first frame update
     void Start(){
@@ -16,11 +18,13 @@ public class InventoryController : MonoBehaviour{
         int i = 0;
 
         foreach( Transform weapon in transform){
-            if(i == selectedWeapon){
-                weapon.gameObject.SetActive(true);
-            }
-            else{
-                weapon.gameObject.SetActive(false);
+            if(weapon.CompareTag("weapon")){
+                if(i == selectedWeapon){
+                    weapon.gameObject.SetActive(true);
+                }
+                else{
+                    weapon.gameObject.SetActive(false);
+                }
             }
             i++;
         }
@@ -31,7 +35,7 @@ public class InventoryController : MonoBehaviour{
         int tmp = selectedWeapon;
 
         if(Input.GetAxis("Mouse ScrollWheel") > 0f){
-            if(selectedWeapon >= transform.childCount -1){
+            if(selectedWeapon >= weaponCount-1){
                selectedWeapon = 0; 
             }
             else{
@@ -41,7 +45,7 @@ public class InventoryController : MonoBehaviour{
 
         if(Input.GetAxis("Mouse ScrollWheel") < 0f){
             if(selectedWeapon <= 0){
-                selectedWeapon = transform.childCount - 1;
+                selectedWeapon = weaponCount - 1;
             }
             else{
                 selectedWeapon--;
@@ -52,5 +56,10 @@ public class InventoryController : MonoBehaviour{
             SelectedWeapon();
         }
 
+    }
+
+    public void addGreenKey(){
+        GameObject clone = Instantiate(greenKey, this.transform);
+        clone.transform.parent = this.transform;
     }
 }

@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 503252698963321110}
   m_LocalRotation: {x: 0, y: 0, z: -0.258819, w: 0.9659259}
-  m_LocalPosition: {x: 0.115, y: -0.031, z: 0}
+  m_LocalPosition: {x: 0.105, y: 0.066, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -97,11 +97,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8df66732a0fd4946b5139de0358cca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
-  bullet: {fileID: 0}
-  bulletTransform: {fileID: 0}
+  playerController: {fileID: 8187020142005799289}
+  bullet: {fileID: 2078598237022014755, guid: dad0f8a4eadf52b4787eb21936c12c68, type: 3}
+  bulletTransform: {fileID: 6331901387111702574}
   timer: 0
-  fireRate: 0
+  fireRate: 0.6
 --- !u!1 &1105745546524348526
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,7 +126,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1105745546524348526}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -177,7 +177,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1519054782775483987}
   m_LocalRotation: {x: 0, y: 0, z: -0.258819, w: 0.9659259}
-  m_LocalPosition: {x: 0.08, y: -0.091, z: 0}
+  m_LocalPosition: {x: 0.069, y: -0.019, z: 0}
   m_LocalScale: {x: 0.40000004, y: 0.40000004, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -369,13 +369,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4d8b5dd93f8d447829e3d2a1c420e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mana: 10
   movementSpeed: 150
   maxSpeed: 1.5
   idleFriction: 0.9
   swordAttack: {fileID: 6288840780831515655}
-  sword: {fileID: 0}
+  sword: {fileID: 1519054782775483987}
   health: 10
+  mana: 10
 --- !u!50 &7915179407895860090
 Rigidbody2D:
   serializedVersion: 4
@@ -395,7 +395,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!95 &1454973948703951193
 Animator:
@@ -430,8 +430,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0014490113, y: -0.049869098}
-  m_Size: {x: 0.07056047, y: 0.07056047}
+  m_Offset: {x: 0, y: -0.05}
+  m_Size: {x: 0.07, y: 0.07}
   m_Direction: 0
 --- !u!1 &4971227215479050335
 GameObject:
@@ -481,6 +481,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedWeapon: 0
+  weaponCount: 3
+  greenKey: {fileID: 0}
 --- !u!1 &8287987139538965402
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,11 +570,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3501908340699630518, guid: 70c9a1b474acd9548a7293bc0a57f475, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.06
+      value: 0.064
       objectReference: {fileID: 0}
     - target: {fileID: 3501908340699630518, guid: 70c9a1b474acd9548a7293bc0a57f475, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.098
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3501908340699630518, guid: 70c9a1b474acd9548a7293bc0a57f475, type: 3}
       propertyPath: m_LocalPosition.z

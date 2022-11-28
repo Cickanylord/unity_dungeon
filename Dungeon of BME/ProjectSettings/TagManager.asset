@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Enemy
   - Wall
+  - weapon
+  - Inventory
+  - GreenKey
+  - Spawn2
   layers:
   - Default
   - TransparentFX

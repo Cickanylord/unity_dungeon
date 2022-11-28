@@ -21,6 +21,7 @@ public class AutomatedDoor : MonoBehaviour
         
     }
 
+
     void OnTriggerEnter2D(Collider2D other) 
     {
         PlayerInput playerInput = other.GetComponent<PlayerInput>();
@@ -30,7 +31,7 @@ public class AutomatedDoor : MonoBehaviour
             animator.SetBool("triggerOpen", triggerOpen);
         }
     }
-
+/*
     void OnTriggerExit2D(Collider2D other)
     {
         PlayerInput playerInput = other.GetComponent<PlayerInput>();
@@ -40,4 +41,6 @@ public class AutomatedDoor : MonoBehaviour
             animator.SetBool("triggerOpen", triggerOpen);
         }
     }
+
+*/
 }

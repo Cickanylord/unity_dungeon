@@ -6,5 +6,7 @@ public interface IDamage
 {
     public float Health{ set; get;}
     public void onHit(float damage, Vector2 knockback); 
-    public void onHit(float damage); 
+    public void onHit(float damage);
+
+    public void ResPawn(); 
 }

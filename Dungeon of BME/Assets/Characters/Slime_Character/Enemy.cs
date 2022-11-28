@@ -9,9 +9,9 @@ public class Enemy : MonoBehaviour, IDamage
     Animator animator;
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
+    Vector3 originPos;
 
-    // health 
-    public float health=1;
+
     //Attack player params
     public float knockbackForce=500f;
     public float damage=3;
@@ -19,38 +19,9 @@ public class Enemy : MonoBehaviour, IDamage
     public PalyerDetection detection;
     public float movementSpeed = 500f;  
 
-
-    bool isMoving = false;
-    bool IsMoving{
-        set{
-            isMoving = value;
-            animator.SetBool("isMoving", isMoving);
-        }
-    }
-
-    void FixedUpdate(){
-        if(detection.detectedObjs.Count>0){
-            Collider2D detectedObject = detection.detectedObjs[0];
-            Vector2 directionToPlayer = (detectedObject.transform.position - transform.position).normalized;
-            rb.AddForce(directionToPlayer * movementSpeed * Time.deltaTime);
-
-
-            if(directionToPlayer.x < 0){
-                spriteRenderer.flipX=true;
-            }   
-            else if(directionToPlayer.x > 0){
-                spriteRenderer.flipX=false;
-            }
-
-            IsMoving=true;
-        }
-        else{
-            IsMoving=false;
-        }
-    }
-
-
-
+    // health 
+    private float maxHealth;
+    public float health=1;
     public float Health{
         set{
             health =value;
@@ -60,38 +31,78 @@ public class Enemy : MonoBehaviour, IDamage
 
                 Defeated();
             }else{
-                 animator.SetTrigger("Demaged");
-            }
-            
+                animator.SetTrigger("Demaged");
+            }     
         }
         get{
-            
             return health;
         }
     }
 
-    private void Defeated()
-    {
-        animator.SetTrigger("Defeated");
+    //decides if character is moving 
+    bool isMoving = false;
+    bool IsMoving{
+        set{
+            isMoving = value;
+            animator.SetBool("isMoving", isMoving);
+        }
     }
 
-    private void RemoveEnemy(){
-        Destroy(gameObject);
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
+        // Start is called before the first frame update
+    void Start(){
+        maxHealth = Health;
+        originPos = transform.position;
         animator=GetComponent<Animator>();
         rb=GetComponent<Rigidbody2D>();
         spriteRenderer= GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void FixedUpdate(){
+        //if ther is a player the enemy goes towards it 
+        if(detection.detectedObjs.Count>0){
+            Collider2D detectedObject = detection.detectedObjs[0];
+
+            Vector2 directionToPlayer = (detectedObject.transform.localPosition - transform.localPosition).normalized;
+            rb.AddForce(directionToPlayer * movementSpeed * Time.deltaTime);
+
+
+            //flips enemy weapon
+            if(directionToPlayer.x < 0){
+                spriteRenderer.flipX=true;
+            }   
+            else if(directionToPlayer.x > 0){
+                spriteRenderer.flipX=false;
+            }
+
+            //if there is force applied the character is moving 
+            IsMoving=true;
+        }
+        else{
+            IsMoving=false;
+        }
     }
+
+    //when the enemy gets defeated sets trigger for animation 
+    private void Defeated(){
+        rb.velocity=new Vector2(0,0);
+        animator.SetTrigger("Defeated");
+    }
+
+    private void RemoveEnemy(){
+        //Destroy(gameObject);
+        gameObject.SetActive(false);
+    }
+
+
+    public void ResPawn(){
+        animator.SetTrigger("Respawn");
+        print("reseted");
+        gameObject.SetActive(true);
+        maxHealth = Health;
+        transform.position = originPos;
+    }
+
 
     void Idle(){
         animator.SetTrigger("Idle");
@@ -99,7 +110,8 @@ public class Enemy : MonoBehaviour, IDamage
 
     public void onHit(float damage, Vector2 knockback){
         Health-=damage;
-        rb.AddForce(knockback);
+        if(Health>0)
+            rb.AddForce(knockback);
     }
 
 
@@ -115,8 +127,8 @@ public class Enemy : MonoBehaviour, IDamage
 
         IDamage enemyObject = (IDamage) other.collider.GetComponent<IDamage>();
 
-        if(enemyObject != null){
-            print(other.collider.tag);
+        if(enemyObject != null && other.collider.tag == "Player"){
+            //print(other.collider.tag);
             //knockback
             Vector3 parentpos = gameObject.GetComponentInParent<Transform>().position;
 
@@ -127,5 +139,7 @@ public class Enemy : MonoBehaviour, IDamage
         }
 
     }
+
+
 }
 
