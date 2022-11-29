@@ -9,8 +9,10 @@ public class RangedEnemy : MonoBehaviour, IDamage
     Animator animator;
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
+    Vector2 originlPos;
 
     // health 
+    private float maxHealth;
     public float health=1;
     //Attack player params
     public float knockbackForce=500f;
@@ -98,13 +100,13 @@ public class RangedEnemy : MonoBehaviour, IDamage
         }
     }
 
-    private void Defeated()
-    {
+    private void Defeated(){
         animator.SetTrigger("Defeated");
     }
 
     private void RemoveEnemy(){
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -113,6 +115,9 @@ public class RangedEnemy : MonoBehaviour, IDamage
         animator=GetComponent<Animator>();
         rb=GetComponent<Rigidbody2D>();
         spriteRenderer= GetComponent<SpriteRenderer>();
+        maxHealth = Health;
+        originlPos = transform.position;
+
     }
 
     // Update is called once per frame
@@ -178,7 +183,11 @@ public class RangedEnemy : MonoBehaviour, IDamage
 
 
     public void ResPawn(){
-        
+        animator.SetTrigger("Respawn");
+        print("reseted");
+        gameObject.SetActive(true);
+        maxHealth = Health;
+        transform.position = originlPos;
     }
 
 

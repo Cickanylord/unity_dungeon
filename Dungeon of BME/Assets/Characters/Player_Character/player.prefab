@@ -372,9 +372,14 @@ MonoBehaviour:
   movementSpeed: 150
   maxSpeed: 1.5
   idleFriction: 0.9
+  inventory: {fileID: 4971227215479050335}
   swordAttack: {fileID: 6288840780831515655}
   sword: {fileID: 1519054782775483987}
+  timer: 0
   health: 10
+  healthbar: {fileID: 0}
+  manabar: {fileID: 0}
+  manaRegenRate: 1
   mana: 10
 --- !u!50 &7915179407895860090
 Rigidbody2D:

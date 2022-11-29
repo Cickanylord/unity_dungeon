@@ -374,7 +374,7 @@ MonoBehaviour:
   knockbackForce: 500
   damage: 3
   detection: {fileID: 6477610518561649134}
-  movementSpeed: 500
+  movementSpeed: 2000
   health: 1
 --- !u!50 &569071079299842168
 Rigidbody2D:

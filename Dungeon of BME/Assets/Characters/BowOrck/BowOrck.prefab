@@ -317,8 +317,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.1133096}
-  m_Size: {x: 0.11187033, y: 0.11187033}
+  m_Offset: {x: 0, y: -0.11330963}
+  m_Size: {x: 0.11187034, y: 0.11187034}
   m_Direction: 0
 --- !u!95 &890359677012462742
 Animator:
@@ -392,7 +392,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 770987575468178337}
-  - component: {fileID: 3168744707244595242}
   m_Layer: 0
   m_Name: BowParent
   m_TagString: Untagged
@@ -416,23 +415,6 @@ Transform:
   m_Father: {fileID: 9140417831261881951}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3168744707244595242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7207927985986432718}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78263cdede2b86c479510f8966abe534, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bullet: {fileID: 2078598237022014755, guid: dad0f8a4eadf52b4787eb21936c12c68, type: 3}
-  bulletTransform: {fileID: 770987575468178337}
-  timer: 0
-  fireRate: 0.6
-  animator: {fileID: 5563750796169317006}
 --- !u!1001 &2614823683652769031
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -493,10 +475,5 @@ PrefabInstance:
 --- !u!4 &1499979453848608433 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3501908340699630518, guid: 70c9a1b474acd9548a7293bc0a57f475, type: 3}
-  m_PrefabInstance: {fileID: 2614823683652769031}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &5563750796169317006 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7602025139510632329, guid: 70c9a1b474acd9548a7293bc0a57f475, type: 3}
   m_PrefabInstance: {fileID: 2614823683652769031}
   m_PrefabAsset: {fileID: 0}

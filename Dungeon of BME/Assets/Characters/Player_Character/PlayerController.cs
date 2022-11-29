@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public float movementSpeed = 150f;
     public float maxSpeed = 8f;
     public float idleFriction = 0.9f;
+    bool dead=false;
     SpriteRenderer spriteRenderer;
 
     //Animation
@@ -26,11 +27,13 @@ public class PlayerController : MonoBehaviour, IDamage
     Rigidbody2D rb;
     Collider2D col;
     GameObject[] enemies;
+    public GameObject inventory;
 
     //attack
     public SwordAttack swordAttack;
     public GameObject sword;
     Vector2 swordRightAttackOffset;
+    public float timer;
 
     //health 
     float maxHealth;
@@ -55,10 +58,10 @@ public class PlayerController : MonoBehaviour, IDamage
 
 
     //mana
+    public ValueBar manabar;
+    public float manaRegenRate = 1;
     private int maxMana; 
     public int mana = 10;
-    public ValueBar manabar;
-
     public int Mana{
         set{
             mana = value;
@@ -88,9 +91,9 @@ public class PlayerController : MonoBehaviour, IDamage
         spriteRenderer= GetComponent<SpriteRenderer>();
         swordRightAttackOffset=sword.transform.localPosition;
         //print("original: "+sword.transform.localPosition);
-        maxHealth = Health;
-        maxMana = Mana;
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        maxMana = Mana;
+        maxHealth = Health;
     }
 
     // Update is called once per frame
@@ -100,31 +103,48 @@ public class PlayerController : MonoBehaviour, IDamage
 
     //movement of player
     private void FixedUpdate(){
-        // move the player, if there is input 
-        if(canMove && movementInput!=Vector2.zero){
-            rb.velocity = Vector2.ClampMagnitude(movementInput * movementSpeed * Time.fixedDeltaTime, maxSpeed);
+        if(!dead){
+            // move the player, if there is input 
+            if(canMove && movementInput!=Vector2.zero){
+                rb.velocity = Vector2.ClampMagnitude(movementInput * movementSpeed * Time.fixedDeltaTime, maxSpeed);
 
-            if(movementInput.x < 0){
-                spriteRenderer.flipX=true;
-                //sword placement
-                sword.transform.rotation = Quaternion.Euler(0,0,30);
-                sword.transform.localPosition = new Vector3(swordRightAttackOffset.x*-1, swordRightAttackOffset.y);
-                //print("right: "+sword.transform.localPosition);
-            }   
-            else if(movementInput.x > 0){
-                spriteRenderer.flipX=false;
-                //sword placement
-                sword.transform.rotation = Quaternion.Euler(0,0,-30);
-                sword.transform.localPosition = swordRightAttackOffset;
-                //print("left: "+sword.transform.localPosition);
+                if(movementInput.x < 0){
+                    spriteRenderer.flipX=true;
+                    //sword placement
+                    sword.transform.rotation = Quaternion.Euler(0,0,30);
+                    sword.transform.localPosition = new Vector3(swordRightAttackOffset.x*-1, swordRightAttackOffset.y);
+                    //print("right: "+sword.transform.localPosition);
+                }   
+                else if(movementInput.x > 0){
+                    spriteRenderer.flipX=false;
+                    //sword placement
+                    sword.transform.rotation = Quaternion.Euler(0,0,-30);
+                    sword.transform.localPosition = swordRightAttackOffset;
+                    //print("left: "+sword.transform.localPosition);
+                }
+                IsMoving=true;
             }
-            IsMoving=true;
+            //stops the player 
+            else{
+                rb.velocity = Vector2.Lerp(rb.velocity, Vector2.zero, idleFriction);
+                IsMoving=false;
+            }
+
+            //mana regen
+            if(Mana < maxMana){
+                //print("kisebb");
+                timer += Time.deltaTime;
+                if(timer>manaRegenRate){
+                    timer=0;
+                    Mana++;
+                }
+            }
         }
-        //stops the player 
-        else{
-            rb.velocity = Vector2.Lerp(rb.velocity, Vector2.zero, idleFriction);
-            IsMoving=false;
+
+        if(dead && Input.GetKey(KeyCode.Q )){
+            ResPawn();
         }
+
 
     }
 
@@ -133,12 +153,13 @@ public class PlayerController : MonoBehaviour, IDamage
     private void Defeated(){
         LockMovement();
         col.enabled= false;
+        inventory.SetActive(false);
+        dead = true;
         animator.SetTrigger("Defeated");
+        //TODO make death scene apeer 
     }
     //After death animation finished deletes the object 
-    private void RemoveEnemy(){
-        Destroy(gameObject);
-    }
+ 
 
     //gets player position when moving 
     void OnMove(InputValue movmentValues ){
@@ -195,12 +216,15 @@ public class PlayerController : MonoBehaviour, IDamage
     }
 
     public void ResPawn(){
+        //TODO make death scene disapeer 
+        dead = false;
         transform.position = new Vector3(0,0,0);
         Health = maxHealth;
-        mana = maxMana;
+        Mana = maxMana;
         animator.SetTrigger("Respawn");
         canMove=true;
         col.enabled= true;
+        inventory.SetActive(true);
 
         foreach (var enemy in enemies){
             IDamage enemyObject = (IDamage) enemy.GetComponent<IDamage>();
@@ -210,5 +234,6 @@ public class PlayerController : MonoBehaviour, IDamage
 
     }
 
+    
 
 }

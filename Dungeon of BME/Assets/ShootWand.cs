@@ -17,7 +17,7 @@ public class ShootWand : MonoBehaviour
 
     private bool canFire=true;
 
-    public Animator animator;
+    //public Animator animator;
     private float rotZ;
     // Start is called before the first frame update
     void Start()
@@ -49,7 +49,7 @@ public class ShootWand : MonoBehaviour
             canFire =false;
             ShootArrow(0);
 
-            animator.SetTrigger("Shoot");
+            //animator.SetTrigger("Shoot");
         }
 
         //special bullet 
@@ -60,7 +60,7 @@ public class ShootWand : MonoBehaviour
             ShootArrow(0);
             ShootArrow(-30);
 
-            animator.SetTrigger("Shoot");
+            //animator.SetTrigger("Shoot");
         }
 
         if(movementInput.x < 0){
