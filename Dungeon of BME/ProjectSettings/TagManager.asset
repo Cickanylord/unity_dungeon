@@ -10,6 +10,15 @@ TagManager:
   - Inventory
   - GreenKey
   - Spawn2
+  - BlueKey
+  - SpawnBlue
+  - SpawnRed
+  - SpawnFinal
+  - RedKey
+  - FinalKey
+  - GameOver
+  - Victory
+  - Restart
   layers:
   - Default
   - TransparentFX

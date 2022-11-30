@@ -116,14 +116,14 @@ public class Enemy : MonoBehaviour, IDamage
 
 
     public void onHit(float damage){
-        print("hit");
+        //print("hit");
         Health-=damage;
     }
 
 
 
     void OnCollisionEnter2D(Collision2D other){
-        print("player_hit");
+        //print("player_hit");
 
         IDamage enemyObject = (IDamage) other.collider.GetComponent<IDamage>();
 

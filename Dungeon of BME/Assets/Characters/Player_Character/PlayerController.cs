@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public float maxSpeed = 8f;
     public float idleFriction = 0.9f;
     bool dead=false;
+    bool victory = false;
     SpriteRenderer spriteRenderer;
 
     //Animation
@@ -141,7 +142,7 @@ public class PlayerController : MonoBehaviour, IDamage
             }
         }
 
-        if(dead && Input.GetKey(KeyCode.Q )){
+        if((dead || victory) && Input.GetKey(KeyCode.Q )){
             ResPawn();
         }
 
@@ -157,8 +158,14 @@ public class PlayerController : MonoBehaviour, IDamage
         dead = true;
         animator.SetTrigger("Defeated");
         //TODO make death scene apeer 
+        GameObject.FindGameObjectWithTag("GameOver").GetComponent<UnityEngine.UI.Text>().text = "Game Over!";
+        GameObject.FindGameObjectWithTag("Restart").GetComponent<UnityEngine.UI.Text>().text = "Press Q to restart";
     }
     //After death animation finished deletes the object 
+
+    public void Victory(){
+        victory = true;
+    }
  
 
     //gets player position when moving 
@@ -217,6 +224,9 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void ResPawn(){
         //TODO make death scene disapeer 
+        GameObject.FindGameObjectWithTag("GameOver").GetComponent<UnityEngine.UI.Text>().text = "";
+        GameObject.FindGameObjectWithTag("Restart").GetComponent<UnityEngine.UI.Text>().text = "";
+        GameObject.FindGameObjectWithTag("Victory").GetComponent<UnityEngine.UI.Text>().text = "";
         dead = false;
         transform.position = new Vector3(0,0,0);
         Health = maxHealth;
