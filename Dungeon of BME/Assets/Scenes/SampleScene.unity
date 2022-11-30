@@ -3411,6 +3411,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BowOrck
       objectReference: {fileID: 0}
+    - target: {fileID: 7243144548577126225, guid: 04b6fc3161abf1c43bc8b266eed572e3, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9140417831261881951, guid: 04b6fc3161abf1c43bc8b266eed572e3, type: 3}
       propertyPath: m_RootOrder
       value: 23
