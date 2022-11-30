@@ -38,8 +38,20 @@ public class DoorController : MonoBehaviour
 
     public void TeleportPlayer(){
         GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
-        GameObject[] spawnpoint = GameObject.FindGameObjectsWithTag("Spawn2");
+        GameObject[] spawnpoint = GameObject.FindGameObjectsWithTag("SpawnFinal");
+        if(keyTag =="GreenKey"){
+            spawnpoint = GameObject.FindGameObjectsWithTag("SpawnBlue");
+        }
+        if(keyTag == "BlueKey"){
+            spawnpoint = GameObject.FindGameObjectsWithTag("SpawnRed");
+        }
         player[0].transform.position = spawnpoint[0].transform.position;
+    }
+
+    public void Victory(){
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().Victory();
+        GameObject.FindGameObjectWithTag("Victory").GetComponent<UnityEngine.UI.Text>().text = "Victory!";
+        GameObject.FindGameObjectWithTag("Restart").GetComponent<UnityEngine.UI.Text>().text = "Press Q to restart";
     }
 
 }

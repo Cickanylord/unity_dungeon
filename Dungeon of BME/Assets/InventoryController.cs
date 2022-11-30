@@ -8,6 +8,9 @@ public class InventoryController : MonoBehaviour{
     public int selectedWeapon = 0;
     public int weaponCount = 3;
     public GameObject greenKey;
+    public GameObject blueKey;
+    public GameObject redKey;
+    public GameObject finalKey;
 
     // Start is called before the first frame update
     void Start(){
@@ -60,6 +63,21 @@ public class InventoryController : MonoBehaviour{
 
     public void addGreenKey(){
         GameObject clone = Instantiate(greenKey, this.transform);
+        clone.transform.parent = this.transform;
+    }
+
+    public void addBlueKey(){
+        GameObject clone = Instantiate(blueKey, this.transform);
+        clone.transform.parent = this.transform;
+    }
+
+    public void addRedKey(){
+        GameObject clone = Instantiate(redKey, this.transform);
+        clone.transform.parent = this.transform;
+    }
+
+    public void addFinalKey(){
+        GameObject clone = Instantiate(finalKey, this.transform);
         clone.transform.parent = this.transform;
     }
 }
