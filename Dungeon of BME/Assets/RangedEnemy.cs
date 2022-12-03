@@ -10,6 +10,7 @@ public class RangedEnemy : MonoBehaviour, IDamage
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
     Vector2 originlPos;
+    GameObject gameController;
 
     // health 
     private float maxHealth;
@@ -42,7 +43,7 @@ public class RangedEnemy : MonoBehaviour, IDamage
 
     void FixedUpdate(){
         
-        if(move.detectedObjs.Count>0){
+        if(move.detectedObjs.Count>0 && !gameController.GetComponent<GameController>().pause){
             Collider2D detectedObject = move.detectedObjs[0];
 
             Vector2 directionToPlayer = (detectedObject.transform.position - transform.position).normalized;
@@ -117,6 +118,7 @@ public class RangedEnemy : MonoBehaviour, IDamage
         spriteRenderer= GetComponent<SpriteRenderer>();
         maxHealth = Health;
         originlPos = transform.position;
+        gameController = GameObject.FindGameObjectWithTag("GameController");
 
     }
 

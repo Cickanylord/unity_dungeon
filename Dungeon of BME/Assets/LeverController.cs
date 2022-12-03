@@ -33,7 +33,7 @@ public class LeverController : MonoBehaviour
             door.GetComponent<SpriteRenderer>().sortingOrder = 3;
         }
         else {
-            door.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            door.GetComponent<SpriteRenderer>().sortingOrder = 1;
         }
     }
 }

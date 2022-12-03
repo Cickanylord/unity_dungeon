@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour, IDamage
 {
+    GameObject gameController;
 
     //movement params 
     Vector2 movementInput;
@@ -37,7 +39,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public float timer;
 
     //health 
-    float maxHealth;
+    public float maxHealth { get; set;}
     public float health=10;
     public ValueBar healthbar;
 
@@ -95,6 +97,7 @@ public class PlayerController : MonoBehaviour, IDamage
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         maxMana = Mana;
         maxHealth = Health;
+        gameController = GameObject.FindGameObjectWithTag("GameController");
     }
 
     // Update is called once per frame
@@ -104,6 +107,9 @@ public class PlayerController : MonoBehaviour, IDamage
 
     //movement of player
     private void FixedUpdate(){
+
+        canMove = !gameController.GetComponent<GameController>().pause;
+
         if(!dead){
             // move the player, if there is input 
             if(canMove && movementInput!=Vector2.zero){
@@ -223,8 +229,11 @@ public class PlayerController : MonoBehaviour, IDamage
     }
 
     public void ResPawn(){
+
+        SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
+
         //TODO make death scene disapeer 
-        GameObject.FindGameObjectWithTag("GameOver").GetComponent<UnityEngine.UI.Text>().text = "";
+        /*GameObject.FindGameObjectWithTag("GameOver").GetComponent<UnityEngine.UI.Text>().text = "";
         GameObject.FindGameObjectWithTag("Restart").GetComponent<UnityEngine.UI.Text>().text = "";
         GameObject.FindGameObjectWithTag("Victory").GetComponent<UnityEngine.UI.Text>().text = "";
         dead = false;
@@ -240,7 +249,7 @@ public class PlayerController : MonoBehaviour, IDamage
             IDamage enemyObject = (IDamage) enemy.GetComponent<IDamage>();
             enemyObject.ResPawn();
             print("reses");
-        }
+        }*/
 
     }
 

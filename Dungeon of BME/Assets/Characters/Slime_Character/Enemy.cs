@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, IDamage
 {
+    GameObject gameController;
     //basic params 
     Animator animator;
     Rigidbody2D rb;
@@ -56,11 +57,12 @@ public class Enemy : MonoBehaviour, IDamage
         animator=GetComponent<Animator>();
         rb=GetComponent<Rigidbody2D>();
         spriteRenderer= GetComponent<SpriteRenderer>();
+        gameController = GameObject.FindGameObjectWithTag("GameController");
     }
 
     void FixedUpdate(){
         //if ther is a player the enemy goes towards it 
-        if(detection.detectedObjs.Count>0){
+        if(detection.detectedObjs.Count>0 && !gameController.GetComponent<GameController>().pause){
             Collider2D detectedObject = detection.detectedObjs[0];
 
             Vector2 directionToPlayer = (detectedObject.transform.localPosition - transform.localPosition).normalized;
