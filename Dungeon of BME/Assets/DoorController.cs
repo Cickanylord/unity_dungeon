@@ -37,15 +37,16 @@ public class DoorController : MonoBehaviour
     }
 
     public void TeleportPlayer(){
-        GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
-        GameObject[] spawnpoint = GameObject.FindGameObjectsWithTag("SpawnFinal");
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject spawnpoint = GameObject.FindGameObjectWithTag("SpawnFinal");
+        player.GetComponent<PlayerController>().Health = player.GetComponent<PlayerController>().maxHealth;
         if(keyTag =="GreenKey"){
-            spawnpoint = GameObject.FindGameObjectsWithTag("SpawnBlue");
+            spawnpoint = GameObject.FindGameObjectWithTag("SpawnBlue");
         }
         if(keyTag == "BlueKey"){
-            spawnpoint = GameObject.FindGameObjectsWithTag("SpawnRed");
+            spawnpoint = GameObject.FindGameObjectWithTag("SpawnRed");
         }
-        player[0].transform.position = spawnpoint[0].transform.position;
+        player.transform.position = spawnpoint.transform.position;
     }
 
     public void Victory(){

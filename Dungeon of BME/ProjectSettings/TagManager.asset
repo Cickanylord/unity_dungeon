@@ -19,6 +19,8 @@ TagManager:
   - GameOver
   - Victory
   - Restart
+  - Canvas
+  - UpgradeList
   layers:
   - Default
   - TransparentFX
