@@ -5,6 +5,8 @@ using UnityEngine;
 public class Upgrade : MonoBehaviour
 {
     GameObject gameController;
+    GameObject player;
+    Collider2D playerCol;
     public GameObject frame;
     public GameObject text;
     public bool active = false;
@@ -26,13 +28,16 @@ public class Upgrade : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerCol = player.GetComponent<Collider2D>();
         gameController = GameObject.FindGameObjectWithTag("GameController");
         upgradeList = GameObject.FindGameObjectWithTag("UpgradeList");
     }
 
 
     void showUpgradeChoices(){
-        gameController.GetComponent<GameController>().pause = true;
+        gameController.GetComponent<GameController>().Pause = true;
+
         active = true;
         GameObject canvas = GameObject.FindGameObjectWithTag("Canvas");
 
@@ -78,7 +83,7 @@ public class Upgrade : MonoBehaviour
                     upgradeList.GetComponent<UpgradeList>().remove(ui1);
                 }
                 hideUpgradeChoices();
-                gameController.GetComponent<GameController>().pause = false;
+                gameController.GetComponent<GameController>().Pause = false;
             }
             if (Input.GetKeyDown(KeyCode.Alpha2)){
                 ui2.Action();
@@ -86,7 +91,7 @@ public class Upgrade : MonoBehaviour
                     upgradeList.GetComponent<UpgradeList>().remove(ui2);
                 }
                 hideUpgradeChoices();
-                gameController.GetComponent<GameController>().pause = false;
+                gameController.GetComponent<GameController>().Pause = false;
             }
             if (Input.GetKey(KeyCode.Alpha3)){
                ui3.Action();
@@ -94,7 +99,7 @@ public class Upgrade : MonoBehaviour
                     upgradeList.GetComponent<UpgradeList>().remove(ui3);
                 }
                 hideUpgradeChoices();
-                gameController.GetComponent<GameController>().pause = false;
+                gameController.GetComponent<GameController>().Pause = false;
             }
         }
 

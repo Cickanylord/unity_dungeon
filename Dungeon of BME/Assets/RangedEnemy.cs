@@ -10,7 +10,8 @@ public class RangedEnemy : MonoBehaviour, IDamage
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
     Vector2 originlPos;
-    GameObject gameController;
+    GameController gameController;
+    bool alive = true;
 
     // health 
     private float maxHealth;
@@ -43,7 +44,7 @@ public class RangedEnemy : MonoBehaviour, IDamage
 
     void FixedUpdate(){
         
-        if(move.detectedObjs.Count>0 && !gameController.GetComponent<GameController>().pause){
+        if(move.detectedObjs.Count>0 && alive/*&& !gameController.GetComponent<GameController>().pause*/){
             Collider2D detectedObject = move.detectedObjs[0];
 
             Vector2 directionToPlayer = (detectedObject.transform.position - transform.position).normalized;
@@ -102,11 +103,13 @@ public class RangedEnemy : MonoBehaviour, IDamage
     }
 
     private void Defeated(){
+        gameController.EnemyDies();
         animator.SetTrigger("Defeated");
     }
 
     private void RemoveEnemy(){
         //Destroy(gameObject);
+        
         gameObject.SetActive(false);
     }
 
@@ -118,7 +121,7 @@ public class RangedEnemy : MonoBehaviour, IDamage
         spriteRenderer= GetComponent<SpriteRenderer>();
         maxHealth = Health;
         originlPos = transform.position;
-        gameController = GameObject.FindGameObjectWithTag("GameController");
+        gameController = (GameController) GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 
     }
 
@@ -148,18 +151,19 @@ public class RangedEnemy : MonoBehaviour, IDamage
 
     void OnCollisionEnter2D(Collision2D other){
        // print("player_hit");
+        if(alive){
+            IDamage enemyObject = (IDamage) other.collider.GetComponent<IDamage>();
 
-        IDamage enemyObject = (IDamage) other.collider.GetComponent<IDamage>();
+            if(enemyObject != null){
+                if(other.collider.tag==targetTag){
+                print(other.collider.tag);
+                //knockback
+                Vector3 parentpos = gameObject.GetComponentInParent<Transform>().position;
+                Vector2 direction = (Vector2) (other.gameObject.transform.position - parentpos).normalized;
+                Vector2 knockback = direction * knockbackForce;
 
-        if(enemyObject != null){
-            if(other.collider.tag==targetTag){
-            print(other.collider.tag);
-            //knockback
-            Vector3 parentpos = gameObject.GetComponentInParent<Transform>().position;
-            Vector2 direction = (Vector2) (other.gameObject.transform.position - parentpos).normalized;
-            Vector2 knockback = direction * knockbackForce;
-
-            enemyObject.onHit(damage, knockback);
+                enemyObject.onHit(damage, knockback);
+                }
             }
         }
 
@@ -190,6 +194,7 @@ public class RangedEnemy : MonoBehaviour, IDamage
         gameObject.SetActive(true);
         maxHealth = Health;
         transform.position = originlPos;
+        alive = true;
     }
 
 

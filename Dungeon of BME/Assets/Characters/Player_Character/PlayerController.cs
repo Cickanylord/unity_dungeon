@@ -45,8 +45,14 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public float Health{
         set{
-            health =value;
-            healthbar.SetValue(Health);
+            if(value >= maxHealth){
+                health = maxHealth;
+            }
+            else{
+                health = value;
+            }
+            print(health);
+            healthbar.SetValue(health);
             //print(health);
                 if(health<=0){
                     print("player "+ health);
@@ -65,6 +71,8 @@ public class PlayerController : MonoBehaviour, IDamage
     public float manaRegenRate = 1;
     private int maxMana; 
     public int mana = 10;
+    public int manaIncremention = 1;
+    int manaIncrementionPause;
     public int Mana{
         set{
             mana = value;
@@ -108,7 +116,7 @@ public class PlayerController : MonoBehaviour, IDamage
     //movement of player
     private void FixedUpdate(){
 
-        canMove = !gameController.GetComponent<GameController>().pause;
+        //canMove = !gameController.GetComponent<GameController>().Pause;
 
         if(!dead){
             // move the player, if there is input 
@@ -143,7 +151,7 @@ public class PlayerController : MonoBehaviour, IDamage
                 timer += Time.deltaTime;
                 if(timer>manaRegenRate){
                     timer=0;
-                    Mana++;
+                    Mana += manaIncremention;
                 }
             }
         }
@@ -167,7 +175,19 @@ public class PlayerController : MonoBehaviour, IDamage
         GameObject.FindGameObjectWithTag("GameOver").GetComponent<UnityEngine.UI.Text>().text = "Game Over!";
         GameObject.FindGameObjectWithTag("Restart").GetComponent<UnityEngine.UI.Text>().text = "Press Q to restart";
     }
-    //After death animation finished deletes the object 
+
+    public void Pause(){
+        LockMovement();
+        col.enabled= false;
+        manaIncrementionPause = manaIncremention;
+        manaIncremention = 0;
+    }
+   
+    public void Resume(){
+        UNLockMovement();
+        col.enabled= true;
+        manaIncremention = manaIncrementionPause;
+    }
 
     public void Victory(){
         victory = true;

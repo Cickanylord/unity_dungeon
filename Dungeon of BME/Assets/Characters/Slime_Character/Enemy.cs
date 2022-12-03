@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, IDamage
 {
-    GameObject gameController;
+    GameController gameController;
     //basic params 
     Animator animator;
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
     Vector3 originPos;
-
+    bool alive = true;
 
     //Attack player params
     public float knockbackForce=500f;
@@ -56,13 +56,14 @@ public class Enemy : MonoBehaviour, IDamage
         originPos = transform.position;
         animator=GetComponent<Animator>();
         rb=GetComponent<Rigidbody2D>();
+
         spriteRenderer= GetComponent<SpriteRenderer>();
-        gameController = GameObject.FindGameObjectWithTag("GameController");
+        gameController = (GameController) GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
     }
 
     void FixedUpdate(){
         //if ther is a player the enemy goes towards it 
-        if(detection.detectedObjs.Count>0 && !gameController.GetComponent<GameController>().pause){
+        if(detection.detectedObjs.Count>0 && alive /*&& !gameController.GetComponent<GameController>().pause*/){
             Collider2D detectedObject = detection.detectedObjs[0];
 
             Vector2 directionToPlayer = (detectedObject.transform.localPosition - transform.localPosition).normalized;
@@ -87,12 +88,15 @@ public class Enemy : MonoBehaviour, IDamage
 
     //when the enemy gets defeated sets trigger for animation 
     private void Defeated(){
-        rb.velocity=new Vector2(0,0);
+        gameController.EnemyDies();
+        alive = false;
         animator.SetTrigger("Defeated");
+    
     }
 
     private void RemoveEnemy(){
         //Destroy(gameObject);
+        
         gameObject.SetActive(false);
     }
 
@@ -103,6 +107,7 @@ public class Enemy : MonoBehaviour, IDamage
         gameObject.SetActive(true);
         maxHealth = Health;
         transform.position = originPos;
+        alive = true;
     }
 
 
@@ -126,18 +131,19 @@ public class Enemy : MonoBehaviour, IDamage
 
     void OnCollisionEnter2D(Collision2D other){
         //print("player_hit");
+        if(alive){
+            IDamage enemyObject = (IDamage) other.collider.GetComponent<IDamage>();
 
-        IDamage enemyObject = (IDamage) other.collider.GetComponent<IDamage>();
+            if(enemyObject != null && other.collider.tag == "Player"){
+                //print(other.collider.tag);
+                //knockback
+                Vector3 parentpos = gameObject.GetComponentInParent<Transform>().position;
 
-        if(enemyObject != null && other.collider.tag == "Player"){
-            //print(other.collider.tag);
-            //knockback
-            Vector3 parentpos = gameObject.GetComponentInParent<Transform>().position;
+                Vector2 direction = (Vector2) (other.gameObject.transform.position - parentpos).normalized;
+                Vector2 knockback = direction * knockbackForce;
 
-            Vector2 direction = (Vector2) (other.gameObject.transform.position - parentpos).normalized;
-            Vector2 knockback = direction * knockbackForce;
-
-            enemyObject.onHit(damage, knockback);
+                enemyObject.onHit(damage, knockback);
+            }
         }
 
     }
