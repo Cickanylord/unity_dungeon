@@ -11,6 +11,7 @@ public class ShootingController : MonoBehaviour
     public Transform bulletTransform;
     public float timer;
     public float fireRate;
+    public float damage;
 
     private bool canFire=true;
 
@@ -79,6 +80,7 @@ public class ShootingController : MonoBehaviour
         Vector3 rotation = transform.position - MousePosDiff;
 
         GameObject clone = Instantiate(bullet, bulletTransform.position, Quaternion.Euler(0,0,rotZ) );
+        clone.GetComponent<BulletMover>().damage = damage;
         Rigidbody2D rb = clone.GetComponent<Rigidbody2D>();
             
 

@@ -34,14 +34,25 @@ public class PlayerController : MonoBehaviour, IDamage
     GameObject[] enemies;
     public GameObject inventory;
 
+
     //attack
     public SwordAttack swordAttack;
     public GameObject sword;
     Vector2 swordRightAttackOffset;
     public float timer;
 
+    public float lifeSteal;
+    public float maxHealth;
     //health 
-    public float maxHealth { get; set;}
+    public float MaxHealth{
+        set{
+            maxHealth = value;
+            healthbar.SetMaxValue(maxHealth);
+        }
+        get{
+            return maxHealth;
+        }
+    }
     public float health=10;
     public ValueBar healthbar;
 
@@ -71,11 +82,23 @@ public class PlayerController : MonoBehaviour, IDamage
     //mana
     public ValueBar manabar;
     public float manaRegenRate = 1;
-    private int maxMana; 
-    public int mana = 10;
-    public int manaIncremention = 1;
-    int manaIncrementionPause;
-    public int Mana{
+    public float maxMana; 
+    public float mana = 10f;
+    public float manaIncremention = 1f;
+    bool manaPause = false;
+    float manaIncrementionPause;
+
+    public float MaxMana{
+        set{
+            maxMana = value;
+            manabar.SetMaxValue(maxMana);
+        }
+        get{
+            return maxMana;
+        }
+    }
+
+    public float Mana{
         set{
             mana = value;
             manabar.SetValue(Mana);
@@ -148,7 +171,7 @@ public class PlayerController : MonoBehaviour, IDamage
             }
 
             //mana regen
-            if(Mana < maxMana){
+            if(Mana < maxMana && !manaPause){
                 //print("kisebb");
                 timer += Time.deltaTime;
                 if(timer>manaRegenRate){
@@ -181,14 +204,16 @@ public class PlayerController : MonoBehaviour, IDamage
     public void Pause(){
         LockMovement();
         col.enabled= false;
-        manaIncrementionPause = manaIncremention;
-        manaIncremention = 0;
+        manaPause = true;
+        //manaIncrementionPause = manaIncremention;
+        //manaIncremention = 0;
     }
    
     public void Resume(){
         UNLockMovement();
         col.enabled= true;
-        manaIncremention = manaIncrementionPause;
+        manaPause = false;
+        //manaIncremention = manaIncrementionPause;
     }
 
     public void Victory(){

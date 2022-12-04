@@ -61,7 +61,24 @@ public class Upgrade : MonoBehaviour
         text3.GetComponent<UnityEngine.UI.Text>().text = "[3]";
 
         ui1 = upgradeList.GetComponent<UpgradeList>().getUpgrade();
+        bool same = true;
+        while (same) {
+            ui2 = upgradeList.GetComponent<UpgradeList>().getUpgrade();
+            if (ui1 != ui2){
+                same = false;
+            }
+        }
+        same = true;
+        while (same) {
+            ui3 = upgradeList.GetComponent<UpgradeList>().getUpgrade();
+            if (ui1 != ui3 && ui2 != ui3){
+                same = false;
+            }
+        }
+
         text1.GetComponent<UnityEngine.UI.Text>().text = $"{ui1.Description} [1]";
+        text2.GetComponent<UnityEngine.UI.Text>().text = $"{ui2.Description} [2]";
+        text3.GetComponent<UnityEngine.UI.Text>().text = $"{ui3.Description} [3]";
 
     }
 
@@ -93,7 +110,7 @@ public class Upgrade : MonoBehaviour
                 hideUpgradeChoices();
                 gameController.GetComponent<GameController>().Pause = false;
             }
-            if (Input.GetKey(KeyCode.Alpha3)){
+            if (Input.GetKeyDown(KeyCode.Alpha3)){
                ui3.Action();
                 if(ui3.OneUse){
                     upgradeList.GetComponent<UpgradeList>().remove(ui3);

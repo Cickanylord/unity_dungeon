@@ -316,6 +316,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 252787816270273865, guid: 83339db99e248a4428aa37d69ffb1782, type: 3}
+      propertyPath: damage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 252787816270273865, guid: 83339db99e248a4428aa37d69ffb1782, type: 3}
+      propertyPath: manaCost
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 252787816270273865, guid: 83339db99e248a4428aa37d69ffb1782, type: 3}
+      propertyPath: specialManaCost
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 503252698963321110, guid: 83339db99e248a4428aa37d69ffb1782, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -392,6 +404,10 @@ PrefabInstance:
       propertyPath: movingSoundEffect
       value: 
       objectReference: {fileID: 1662036559}
+    - target: {fileID: 9126192467221552808, guid: 83339db99e248a4428aa37d69ffb1782, type: 3}
+      propertyPath: damage
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 9126192467221552808, guid: 83339db99e248a4428aa37d69ffb1782, type: 3}
       propertyPath: crossHair
       value: 
