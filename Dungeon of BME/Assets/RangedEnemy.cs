@@ -6,6 +6,7 @@ using UnityEngine;
 public class RangedEnemy : MonoBehaviour, IDamage
 {
     //basic params 
+    public AudioSource rangedEnemyDeath;
     Animator animator;
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
@@ -105,6 +106,7 @@ public class RangedEnemy : MonoBehaviour, IDamage
     private void Defeated(){
         gameController.EnemyDies();
         animator.SetTrigger("Defeated");
+        rangedEnemyDeath.Play();
     }
 
     private void RemoveEnemy(){
