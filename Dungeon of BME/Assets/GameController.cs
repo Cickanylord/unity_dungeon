@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour
     PlayerController playerContorller;
     public GameObject player;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +41,7 @@ public class GameController : MonoBehaviour
     }
 
     public void EnemyDies(){
-        playerContorller.Health++;
+        playerContorller.Health += playerContorller.lifeSteal;
     }
     // Update is called once per frame
     void Update()

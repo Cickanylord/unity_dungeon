@@ -13,6 +13,9 @@ public class ShootWand : MonoBehaviour
     public float fireRate;
     Vector2 wandRightAttackOffset;
     Vector2 movementInput;
+    public float damage;
+    public float manaCost;
+    public float specialManaCost;
 
 
     private bool canFire=true;
@@ -44,7 +47,7 @@ public class ShootWand : MonoBehaviour
             }
         }
         
-        if (Input.GetKey(KeyCode.Q )&& canFire && playerController.Mana >= 2){
+        if (Input.GetKey(KeyCode.Q )&& canFire && playerController.Mana >= manaCost){
             playerController.Mana -= 2;
             canFire =false;
             ShootArrow(0);
@@ -53,7 +56,7 @@ public class ShootWand : MonoBehaviour
         }
 
         //special bullet 
-        if (Input.GetKey(KeyCode.R )&& canFire && playerController.Mana >= 5){
+        if (Input.GetKey(KeyCode.R )&& canFire && playerController.Mana >= specialManaCost){
             canFire=false;
             playerController.Mana -= 5;
             ShootArrow(30);
@@ -86,6 +89,7 @@ public class ShootWand : MonoBehaviour
         Vector3 rotation = transform.position - MousePosDiff;
 
         GameObject clone = Instantiate(bullet, bulletTransform.position, Quaternion.Euler(0,0,rotZ) );
+        clone.GetComponent<BulletMover>().damage = damage;
         Rigidbody2D rb = clone.GetComponent<Rigidbody2D>();
             
 
