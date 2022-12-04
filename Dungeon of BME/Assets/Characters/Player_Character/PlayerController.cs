@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour, IDamage
 {
     GameObject gameController;
 
+    public AudioSource hitSound;
+
     //movement params 
     Vector2 movementInput;
 
@@ -133,7 +135,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     // Update is called once per frame
     void Update(){
-        
+
     }
 
     //movement of player
@@ -263,6 +265,7 @@ public class PlayerController : MonoBehaviour, IDamage
     //Get damage functions 
     public void onHit(float damage, Vector2 knockback){
         Health-=damage;
+        hitSound.Play();
         if(Health>0)
             rb.AddForce(knockback);
     }

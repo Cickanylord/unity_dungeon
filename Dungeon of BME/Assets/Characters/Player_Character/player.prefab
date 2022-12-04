@@ -251,6 +251,7 @@ GameObject:
   - component: {fileID: 7915179407895860090}
   - component: {fileID: 1454973948703951193}
   - component: {fileID: 1639160120854019499}
+  - component: {fileID: 5828568904863921230}
   m_Layer: 0
   m_Name: player
   m_TagString: Player
@@ -369,6 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4d8b5dd93f8d447829e3d2a1c420e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movingSoundEffect: {fileID: 0}
   movementSpeed: 150
   maxSpeed: 1.5
   idleFriction: 0.9
@@ -381,6 +383,7 @@ MonoBehaviour:
   manabar: {fileID: 0}
   manaRegenRate: 1
   mana: 10
+  manaIncremention: 1
 --- !u!50 &7915179407895860090
 Rigidbody2D:
   serializedVersion: 4
@@ -438,6 +441,14 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.05}
   m_Size: {x: 0.07, y: 0.07}
   m_Direction: 0
+--- !u!81 &5828568904863921230
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4463888252876027791}
+  m_Enabled: 1
 --- !u!1 &4971227215479050335
 GameObject:
   m_ObjectHideFlags: 0

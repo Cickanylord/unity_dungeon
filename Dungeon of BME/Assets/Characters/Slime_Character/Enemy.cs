@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour, IDamage
 {
     GameController gameController;
     //basic params 
+    public AudioSource enemyDeath;
+    public AudioSource enemyHit;
     Animator animator;
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
@@ -91,7 +93,7 @@ public class Enemy : MonoBehaviour, IDamage
         gameController.EnemyDies();
         alive = false;
         animator.SetTrigger("Defeated");
-    
+        enemyDeath.Play();
     }
 
     private void RemoveEnemy(){
@@ -117,8 +119,11 @@ public class Enemy : MonoBehaviour, IDamage
 
     public void onHit(float damage, Vector2 knockback){
         Health-=damage;
-        if(Health>0)
+        if (Health > 0)
+        {
             rb.AddForce(knockback);
+            enemyHit.Play();
+        }
     }
 
 
