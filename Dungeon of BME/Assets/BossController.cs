@@ -16,11 +16,11 @@ public class BossController : MonoBehaviour, IDamage
 
     // health 
     private float maxHealth;
-    public float health=1;
+    public float health=20;
     //Attack player params
     public float knockbackForce=500f;
     public float damage=3;
-    public float fireRate = 0.5f;
+    public float fireRate = 1f;
     private float nextFire = 0.0f;
 
 
@@ -55,7 +55,7 @@ public class BossController : MonoBehaviour, IDamage
             if(aim.detectedObjs.Count>0){
                 if(Time.time > nextFire){
 
-                    for(float i=0f; i <= 180; i=+10f){
+                    for (int i = 0; i <= 350; i+=20){
                         ShootArrowAtPlayer(directionToPlayer,i);
                     }
                     
@@ -95,7 +95,7 @@ public class BossController : MonoBehaviour, IDamage
             if(health<=0){
                 Defeated();
             }else{
-                animator.SetTrigger("Demaged");
+                //animator.SetTrigger("Demaged");
             }
             
         }
@@ -109,7 +109,7 @@ public class BossController : MonoBehaviour, IDamage
         gameController.EnemyDies();
         animator.SetTrigger("Defeated");
         gameObject.transform.GetChild(0).gameObject.SetActive(false);
-        rangedEnemyDeath.Play();
+        //rangedEnemyDeath.Play();
         alive = false;
     }
 
@@ -182,7 +182,7 @@ public class BossController : MonoBehaviour, IDamage
         bulletMover.targetTag = targetTag;
         Rigidbody2D rb = clone.GetComponent<Rigidbody2D>();
         Vector2 arrowDir = new Vector2( direction.x , direction.y ).normalized * 1 ;
-        rb.velocity = arrowDir;
+        rb.velocity = Quaternion.Euler(0,0,degree) * arrowDir;
         float rotZ = Mathf.Atan2(arrowDir.y, arrowDir.x) * Mathf.Rad2Deg;
 
 

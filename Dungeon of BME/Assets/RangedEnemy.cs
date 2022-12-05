@@ -93,7 +93,7 @@ public class RangedEnemy : MonoBehaviour, IDamage
             if(health<=0){
                 Defeated();
             }else{
-                animator.SetTrigger("Demaged");
+               // animator.SetTrigger("Demaged");
             }
             
         }
