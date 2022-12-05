@@ -3,11 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedEnemy : MonoBehaviour, IDamage
+public class BossController : MonoBehaviour, IDamage
 {
     //basic params 
     public AudioSource rangedEnemyDeath;
-    public AudioSource enemyArrowSound;
     Animator animator;
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
@@ -17,11 +16,11 @@ public class RangedEnemy : MonoBehaviour, IDamage
 
     // health 
     private float maxHealth;
-    public float health=1;
+    public float health=20;
     //Attack player params
     public float knockbackForce=500f;
     public float damage=3;
-    public float fireRate = 0.5f;
+    public float fireRate = 1f;
     private float nextFire = 0.0f;
 
 
@@ -33,7 +32,7 @@ public class RangedEnemy : MonoBehaviour, IDamage
     public GameObject bullet;
 
     public string targetTag="Player";
-    public Transform bowParent;
+   
 
 
     bool isMoving = false;
@@ -52,12 +51,14 @@ public class RangedEnemy : MonoBehaviour, IDamage
             Vector2 directionToPlayer = (detectedObject.transform.position - transform.position).normalized;
 
             float rotZ = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
-            bowParent.rotation =  Quaternion.Euler(0,0,rotZ);
-        
 
             if(aim.detectedObjs.Count>0){
                 if(Time.time > nextFire){
-                    ShootArrowAtPlayer(directionToPlayer);
+
+                    for (int i = 0; i <= 350; i+=20){
+                        ShootArrowAtPlayer(directionToPlayer,i);
+                    }
+                    
                 }
                 if(directionToPlayer.x < 0){
                     spriteRenderer.flipX=true;
@@ -94,7 +95,7 @@ public class RangedEnemy : MonoBehaviour, IDamage
             if(health<=0){
                 Defeated();
             }else{
-               // animator.SetTrigger("Demaged");
+                //animator.SetTrigger("Demaged");
             }
             
         }
@@ -107,13 +108,13 @@ public class RangedEnemy : MonoBehaviour, IDamage
     private void Defeated(){
         gameController.EnemyDies();
         animator.SetTrigger("Defeated");
-        rangedEnemyDeath.Play(); 
+        gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        //rangedEnemyDeath.Play();
         alive = false;
     }
 
     private void RemoveEnemy(){
-        //Destroy(gameObject);
-        
+        //Destroy(gameObject); 
         gameObject.SetActive(false);
     }
 
@@ -173,7 +174,7 @@ public class RangedEnemy : MonoBehaviour, IDamage
 
     }
 
-    private void ShootArrowAtPlayer(Vector2 direction){
+    private void ShootArrowAtPlayer(Vector2 direction, float degree){
         
         nextFire = Time.time + fireRate;
         GameObject clone = Instantiate(bullet,transform.position, transform.rotation);
@@ -181,15 +182,14 @@ public class RangedEnemy : MonoBehaviour, IDamage
         bulletMover.targetTag = targetTag;
         Rigidbody2D rb = clone.GetComponent<Rigidbody2D>();
         Vector2 arrowDir = new Vector2( direction.x , direction.y ).normalized * 1 ;
-        rb.velocity = arrowDir;
+        rb.velocity = Quaternion.Euler(0,0,degree) * arrowDir;
         float rotZ = Mathf.Atan2(arrowDir.y, arrowDir.x) * Mathf.Rad2Deg;
 
 
 
         
-        clone.transform.rotation = Quaternion.Euler(0,0,rotZ);
+        clone.transform.rotation = Quaternion.Euler(0,0,rotZ + degree);
         
-        enemyArrowSound.Play();
     }
 
 

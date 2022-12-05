@@ -37,7 +37,7 @@ public class BulletMover : MonoBehaviour{
             Vector3 parentpos = gameObject.GetComponentInParent<Transform>().position;
             Vector2 direction = (Vector2) (other.gameObject.transform.position - parentpos).normalized;
 
-            enemyObject.onHit(3,direction*knockbackForce);
+            enemyObject.onHit(damage,direction*knockbackForce);
             Destroy(this.gameObject);
         }
 
