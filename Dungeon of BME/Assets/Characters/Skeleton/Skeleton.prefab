@@ -271,6 +271,7 @@ Transform:
   m_Children:
   - {fileID: 7051529178757760843}
   - {fileID: 2115942918584852330}
+  - {fileID: 6701284383692531987}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -336,11 +337,11 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.11330963}
-  m_Size: {x: 0.11187034, y: 0.11187034}
+  m_Offset: {x: 0, y: -0.012123485}
+  m_Size: {x: 0.11187034, y: 0.31424278}
   m_Direction: 0
 --- !u!95 &2455069117866994036
 Animator:
@@ -380,7 +381,7 @@ MonoBehaviour:
   damage: 3
   detection: {fileID: 6477610518561649134}
   movementSpeed: 2000
-  health: 1
+  health: 10
 --- !u!50 &569071079299842168
 Rigidbody2D:
   serializedVersion: 4
@@ -400,7 +401,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!82 &3017793369769826573
 AudioSource:
@@ -608,3 +609,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundEffect: {fileID: 1791964424049190078}
   soundEffect2: {fileID: 0}
+--- !u!1 &7356352604258430537
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6701284383692531987}
+  - component: {fileID: 146669924655857706}
+  m_Layer: 0
+  m_Name: HitBox
+  m_TagString: HitBox
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6701284383692531987
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7356352604258430537}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.032256853}
+  m_LocalScale: {x: 1.6666666, y: 1.6666666, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5805228587817919421}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &146669924655857706
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7356352604258430537}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0007314682, y: -0.06706238}
+  m_Size: {x: 0.05120659, y: 0.053159952}
+  m_Direction: 0

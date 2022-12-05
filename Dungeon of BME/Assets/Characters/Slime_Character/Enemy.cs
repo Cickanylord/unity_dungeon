@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour, IDamage
                 if(alive)
                     Defeated();
             }else{
-                animator.SetTrigger("Demaged");
+                //animator.SetTrigger("Demaged");
             }     
         }
         get{

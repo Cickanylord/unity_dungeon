@@ -40,11 +40,22 @@ public class BulletMover : MonoBehaviour{
             enemyObject.onHit(damage,direction*knockbackForce);
             Destroy(this.gameObject);
         }
+        if(other.tag == "HitBox"){
+            Destroy(this.gameObject);
+        }
 
         if(other.tag=="Wall"){
             Destroy(this.gameObject);
         }
         
+    }
+
+    private void OnCollisionEnter2D(Collision2D other){
+            if(other.collider.tag == "HitBox"){
+            Destroy(this.gameObject);
+            print("hitbox");
+        }
+        print("hitbox");
     }
 
 
