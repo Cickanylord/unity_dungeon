@@ -18,6 +18,8 @@ public class ShootingController : MonoBehaviour
     public Animator animator;
     private float rotZ;
 
+    public AudioSource arrowSound;
+
 
     
 
@@ -93,6 +95,8 @@ public class ShootingController : MonoBehaviour
        // print("arrow"+direction.x +" "+ direction.y);
 
         clone.transform.rotation = Quaternion.Euler(0,0,rot + 180 +dif);
+
+        arrowSound.Play();
 
     }
 
