@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour, IDamage
     GameObject[] enemies;
     public GameObject inventory;
 
+    public GameObject notification;
+
 
     //attack
     public SwordAttack swordAttack;
@@ -81,10 +83,10 @@ public class PlayerController : MonoBehaviour, IDamage
 
     //mana
     public ValueBar manabar;
-    public float manaRegenRate = 1;
+    public float manaRegenRate = 0.05f;
     public float maxMana; 
     public float mana = 10f;
-    public float manaIncremention = 1f;
+    public float manaIncremention = 0.01f;
     bool manaPause = false;
     float manaIncrementionPause;
 
@@ -131,6 +133,7 @@ public class PlayerController : MonoBehaviour, IDamage
         maxMana = Mana;
         maxHealth = Health;
         gameController = GameObject.FindGameObjectWithTag("GameController");
+        DeNotifyPlayer();
     }
 
     // Update is called once per frame
@@ -299,6 +302,14 @@ public class PlayerController : MonoBehaviour, IDamage
             print("reses");
         }*/
 
+    }
+
+    public void NotifyPlayer(){
+        notification.SetActive(true);
+    }
+
+    public void DeNotifyPlayer(){
+        notification.SetActive(false);
     }
 
     

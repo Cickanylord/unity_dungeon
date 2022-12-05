@@ -21,6 +21,7 @@ TagManager:
   - Restart
   - Canvas
   - UpgradeList
+  - Door1
   layers:
   - Default
   - TransparentFX

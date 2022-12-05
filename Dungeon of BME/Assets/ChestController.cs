@@ -30,6 +30,7 @@ public class ChestController : MonoBehaviour
             animator.SetBool("isOpen", isOpen);
             col.size = new Vector2(0.3167033f, 0.2551677f);
             col.offset = new Vector2(-0.001648307f, -0.01648343f);
+            this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
         }
     }
 }

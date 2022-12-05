@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 429ea2b702ab8d341a187158fba69a3a
+guid: 13d1298e8b1f0d04cb74b8946c96fc6b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,64 +117,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: GroundLever_0
+      name: SideDoor_0
       rect:
         serializedVersion: 2
-        x: 7
+        x: 0
         y: 0
-        width: 32
-        height: 26
+        width: 16
+        height: 80
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 87e1652980cf7f844b49e8760e11fe61
-      internalID: -1895490828
+      spriteID: 47b9a4af26022764bb34cc1245227ea6
+      internalID: 351479077
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GroundLever_1
+      name: SideDoor_1
       rect:
         serializedVersion: 2
-        x: 38
-        y: 1
-        width: 32
-        height: 26
+        x: 16
+        y: 0
+        width: 16
+        height: 80
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7406080c799f224db7bb508570ea530
-      internalID: -1090841497
+      spriteID: 121fb9c973c439f43abd9e972d046290
+      internalID: 1732171887
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GroundLever_2
+      name: SideDoor_2
       rect:
         serializedVersion: 2
-        x: 74
-        y: 1
-        width: 32
-        height: 26
+        x: 32
+        y: 0
+        width: 16
+        height: 80
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c9dac98a11fc4c47962e5638a801d13
-      internalID: 1039485132
+      spriteID: b2e483e75e12a39499ef130ba69a515d
+      internalID: 2057759605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SideDoor_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19a50085382ca2448a1e3d4f203c9f4a
+      internalID: 430459284
       vertices: []
       indices: 
       edges: []
@@ -190,9 +211,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      GroundLever_1: -1090841497
-      GroundLever_0: -1895490828
-      GroundLever_2: 1039485132
+      SideDoor_0: 351479077
+      SideDoor_2: 2057759605
+      SideDoor_3: 430459284
+      SideDoor_1: 1732171887
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
