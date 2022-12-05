@@ -6,7 +6,9 @@ using UnityEngine;
 public class BossController : MonoBehaviour, IDamage
 {
     //basic params 
-    public AudioSource rangedEnemyDeath;
+    public AudioSource bossDeath;
+    public AudioSource bossHit;
+    public AudioSource bossMagicSound;
     Animator animator;
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
@@ -110,7 +112,7 @@ public class BossController : MonoBehaviour, IDamage
         gameController.EnemyDies();
         animator.SetTrigger("Defeated");
         gameObject.transform.GetChild(0).gameObject.SetActive(false);
-        //rangedEnemyDeath.Play();
+        bossDeath.Play();
         alive = false;
     }
 
@@ -143,8 +145,12 @@ public class BossController : MonoBehaviour, IDamage
 
     public void onHit(float damage, Vector2 knockback){
         Health-=damage;
-        if(Health>0)
+        if (Health > 0)
+        {
             rb.AddForce(knockback);
+            bossHit.Play();
+        }
+        
     }
 
 
@@ -190,6 +196,8 @@ public class BossController : MonoBehaviour, IDamage
 
         
         clone.transform.rotation = Quaternion.Euler(0,0,rotZ + degree);
+
+        bossMagicSound.Play();
         
     }
 
