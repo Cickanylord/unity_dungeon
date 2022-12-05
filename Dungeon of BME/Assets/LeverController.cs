@@ -28,7 +28,7 @@ public class LeverController : MonoBehaviour
         animator.SetBool("isOpen", isOpen);
         door.GetComponent<Animator>().SetBool("triggerOpen", isOpen);
         door.GetComponent<BoxCollider2D>().isTrigger = isOpen;
-        if(isOpen)
+        if(isOpen && door.tag == "Door1")
         {
             door.GetComponent<SpriteRenderer>().sortingOrder = 3;
         }

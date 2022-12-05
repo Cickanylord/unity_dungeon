@@ -31,6 +31,7 @@ public class Interactable : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.CompareTag("Player"))
         {
+            other.gameObject.GetComponent<PlayerController>().NotifyPlayer();
             isInRange = true;
         }
     }
@@ -38,6 +39,7 @@ public class Interactable : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other) {
         if(other.gameObject.CompareTag("Player"))
         {
+            other.gameObject.GetComponent<PlayerController>().DeNotifyPlayer();
             isInRange = false;
         }
     }
