@@ -60,20 +60,20 @@ public class ShootWand : MonoBehaviour
         if (Input.GetKey(KeyCode.R )&& canFire && playerController.Mana >= specialManaCost){
             canFire=false;
             playerController.Mana -= 5;
-            ShootArrow(30);
+            ShootArrow(20);
             ShootArrow(0);
-            ShootArrow(-30);
+            ShootArrow(-20);
 
             //animator.SetTrigger("Shoot");
         }
 
         if(movementInput.x < 0){
-        transform.rotation = Quaternion.Euler(0,0,30);
+        transform.rotation = Quaternion.Euler(0,0,20);
         transform.localPosition = new Vector3(wandRightAttackOffset.x*-1, wandRightAttackOffset.y);
         }
 
         else if(movementInput.x > 0){
-            transform.rotation = Quaternion.Euler(0,0,-30);
+            transform.rotation = Quaternion.Euler(0,0,-20);
             transform.localPosition = wandRightAttackOffset;
         }
 

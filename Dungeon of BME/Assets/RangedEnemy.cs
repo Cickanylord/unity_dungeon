@@ -92,7 +92,8 @@ public class RangedEnemy : MonoBehaviour, IDamage
            
             print("hit");
             if(health<=0){
-                Defeated();
+                if(alive)
+                    Defeated();
             }else{
                // animator.SetTrigger("Demaged");
             }

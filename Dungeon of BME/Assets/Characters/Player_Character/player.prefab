@@ -658,16 +658,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4d8b5dd93f8d447829e3d2a1c420e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitSound: {fileID: 0}
+  hitSound: {fileID: 5865902943385504871}
   movementSpeed: 150
   maxSpeed: 1.5
   idleFriction: 0.9
   inventory: {fileID: 4971227215479050335}
-  notification: {fileID: 0}
+  notification: {fileID: 1073503556595846175}
   swordAttack: {fileID: 6288840780831515655}
   sword: {fileID: 1519054782775483987}
   timer: 0
-  lifeSteal: 0
+  lifeSteal: 1
   maxHealth: 0
   health: 10
   healthbar: {fileID: 0}
@@ -675,7 +675,7 @@ MonoBehaviour:
   manaRegenRate: 1
   maxMana: 0
   mana: 10
-  manaIncremention: 1
+  manaIncremention: 0.01
 --- !u!50 &7915179407895860090
 Rigidbody2D:
   serializedVersion: 4

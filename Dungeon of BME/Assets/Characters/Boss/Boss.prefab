@@ -377,7 +377,7 @@ MonoBehaviour:
   aim: {fileID: 96636450475625844}
   move: {fileID: 6469656771851334370}
   movementSpeed: 500
-  bullet: {fileID: 2078598237022014755, guid: dad0f8a4eadf52b4787eb21936c12c68, type: 3}
+  bullet: {fileID: 2078598237022014755, guid: dcd2a49347ac6cd4cbd23c8c01e2a792, type: 3}
   targetTag: Player
 --- !u!1 &5354723818241757095
 GameObject:
