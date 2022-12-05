@@ -90,7 +90,7 @@ public class ShootingController : MonoBehaviour
         
         rb.velocity = Quaternion.Euler(0,0,dif) * arrowDir;
        //rb.velocity =  arrowDir * Quaternion.Euler(0,0,rot + 180 +dif); Ezt a rakos szart....
-        print("arrow"+direction.x +" "+ direction.y);
+       // print("arrow"+direction.x +" "+ direction.y);
 
         clone.transform.rotation = Quaternion.Euler(0,0,rot + 180 +dif);
 

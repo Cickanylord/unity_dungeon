@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedEnemy : MonoBehaviour, IDamage
+public class BossController : MonoBehaviour, IDamage
 {
     //basic params 
     public AudioSource rangedEnemyDeath;
@@ -32,7 +32,7 @@ public class RangedEnemy : MonoBehaviour, IDamage
     public GameObject bullet;
 
     public string targetTag="Player";
-    public Transform bowParent;
+   
 
 
     bool isMoving = false;
@@ -51,12 +51,14 @@ public class RangedEnemy : MonoBehaviour, IDamage
             Vector2 directionToPlayer = (detectedObject.transform.position - transform.position).normalized;
 
             float rotZ = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
-            bowParent.rotation =  Quaternion.Euler(0,0,rotZ);
-        
 
             if(aim.detectedObjs.Count>0){
                 if(Time.time > nextFire){
-                    ShootArrowAtPlayer(directionToPlayer);
+
+                    for(float i=0f; i <= 180; i=+10f){
+                        ShootArrowAtPlayer(directionToPlayer,i);
+                    }
+                    
                 }
                 if(directionToPlayer.x < 0){
                     spriteRenderer.flipX=true;
@@ -106,13 +108,13 @@ public class RangedEnemy : MonoBehaviour, IDamage
     private void Defeated(){
         gameController.EnemyDies();
         animator.SetTrigger("Defeated");
-        rangedEnemyDeath.Play(); 
+        gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        rangedEnemyDeath.Play();
         alive = false;
     }
 
     private void RemoveEnemy(){
-        //Destroy(gameObject);
-        
+        //Destroy(gameObject); 
         gameObject.SetActive(false);
     }
 
@@ -172,7 +174,7 @@ public class RangedEnemy : MonoBehaviour, IDamage
 
     }
 
-    private void ShootArrowAtPlayer(Vector2 direction){
+    private void ShootArrowAtPlayer(Vector2 direction, float degree){
         
         nextFire = Time.time + fireRate;
         GameObject clone = Instantiate(bullet,transform.position, transform.rotation);
@@ -186,7 +188,7 @@ public class RangedEnemy : MonoBehaviour, IDamage
 
 
         
-        clone.transform.rotation = Quaternion.Euler(0,0,rotZ);
+        clone.transform.rotation = Quaternion.Euler(0,0,rotZ + degree);
         
     }
 
