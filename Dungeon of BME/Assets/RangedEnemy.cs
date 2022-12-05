@@ -7,6 +7,7 @@ public class RangedEnemy : MonoBehaviour, IDamage
 {
     //basic params 
     public AudioSource rangedEnemyDeath;
+    public AudioSource enemyArrowSound;
     Animator animator;
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
@@ -187,6 +188,7 @@ public class RangedEnemy : MonoBehaviour, IDamage
         
         clone.transform.rotation = Quaternion.Euler(0,0,rotZ);
         
+        enemyArrowSound.Play();
     }
 
 

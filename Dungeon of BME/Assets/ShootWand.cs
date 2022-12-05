@@ -16,6 +16,7 @@ public class ShootWand : MonoBehaviour
     public float damage;
     public float manaCost;
     public float specialManaCost;
+    public AudioSource projectileSound;
 
 
     private bool canFire=true;
@@ -102,6 +103,7 @@ public class ShootWand : MonoBehaviour
         print("arrow"+direction.x +" "+ direction.y);
 
         clone.transform.rotation = Quaternion.Euler(0,0,rot + 180 +dif);
+        projectileSound.Play();
 
     }
 }
