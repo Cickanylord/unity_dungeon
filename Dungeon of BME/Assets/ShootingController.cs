@@ -12,6 +12,7 @@ public class ShootingController : MonoBehaviour
     public float timer;
     public float fireRate;
     public float damage;
+    private GameObject gameController;
 
     private bool canFire=true;
 
@@ -32,6 +33,7 @@ public class ShootingController : MonoBehaviour
        // Cursor.visible= false;
        // Cursor.lockState=CursorLockMode.Locked;
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();  
+        gameController = GameObject.FindGameObjectWithTag("GameController");
     }
 
 
@@ -54,14 +56,14 @@ public class ShootingController : MonoBehaviour
         
         }
         
-        if (Input.GetKey(KeyCode.Q )&& canFire){
+        if (Input.GetKey(KeyCode.Q )&& canFire && !gameController.GetComponent<GameController>().Pause){
             canFire=false;
             ShootArrow(0);
             animator.SetTrigger("Shoot");
         }
 
         //special bullet 
-        if (Input.GetKey(KeyCode.R )&& canFire){
+        if (Input.GetKey(KeyCode.R )&& canFire && !gameController.GetComponent<GameController>().Pause){
             canFire=false;
             
             ShootArrow(30);

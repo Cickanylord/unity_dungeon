@@ -14,9 +14,36 @@ public class ShootWand : MonoBehaviour
     Vector2 wandRightAttackOffset;
     Vector2 movementInput;
     public float damage;
-    public float manaCost;
-    public float specialManaCost;
+    private float manaCost = 2f;
+    public float ManaCost{
+        get {
+            return manaCost;
+        }
+        set {
+            if(value <= 0f){
+                manaCost = 0f;
+            }
+            else{
+                manaCost = value;
+            }
+        }
+    }
+    private float specialManaCost = 5f;
+    public float SpecialManaCost{
+        get {
+            return specialManaCost;
+        }
+        set {
+            if(value <= 0f){
+                specialManaCost = 0f;
+            }
+            else{
+                specialManaCost = value;
+            }
+        }
+    }
     public AudioSource projectileSound;
+    private GameObject gameController;
 
 
     private bool canFire=true;
@@ -28,6 +55,7 @@ public class ShootWand : MonoBehaviour
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();  
         wandRightAttackOffset = transform.localPosition;
+        gameController = GameObject.FindGameObjectWithTag("GameController");
     }
 
     // Update is called once per frame
@@ -48,8 +76,8 @@ public class ShootWand : MonoBehaviour
             }
         }
         
-        if (Input.GetKey(KeyCode.Q )&& canFire && playerController.Mana >= manaCost){
-            playerController.Mana -= 2;
+        if (Input.GetKey(KeyCode.Q )&& canFire && playerController.Mana >= ManaCost && !gameController.GetComponent<GameController>().Pause){
+            playerController.Mana -= ManaCost;
             canFire =false;
             ShootArrow(0);
 
@@ -57,9 +85,9 @@ public class ShootWand : MonoBehaviour
         }
 
         //special bullet 
-        if (Input.GetKey(KeyCode.R )&& canFire && playerController.Mana >= specialManaCost){
+        if (Input.GetKey(KeyCode.R )&& canFire && playerController.Mana >= SpecialManaCost && !gameController.GetComponent<GameController>().Pause){
             canFire=false;
-            playerController.Mana -= 5;
+            playerController.Mana -= SpecialManaCost;
             ShootArrow(20);
             ShootArrow(0);
             ShootArrow(-20);

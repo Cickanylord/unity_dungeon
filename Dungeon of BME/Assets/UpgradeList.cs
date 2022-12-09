@@ -12,7 +12,7 @@ public class UpgradeList : MonoBehaviour
     void Start()
     {
         list.Add(new UpgradeItem() { Description = "Gain +1 sword damage",
-             Action = () => {GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).gameObject.GetComponent<SwordAttack>().damage++;
+             Action = () => {GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).gameObject.GetComponent<SwordAttack>().damage += 1f;
                     return 0;}, OneUse = false});
 
         list.Add(new UpgradeItem() { Description = "Gain +0.5 speed",
@@ -20,7 +20,7 @@ public class UpgradeList : MonoBehaviour
                     return 0;}, OneUse = false});
         
         list.Add(new UpgradeItem() { Description = "Your maximum health increases by 2",
-             Action = () => {GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().MaxHealth += 2;
+             Action = () => {GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().MaxHealth += 2f;
                     return 0;}, OneUse = false});
 
         list.Add(new UpgradeItem() { Description = "Your mana regenerates faster",
@@ -28,27 +28,27 @@ public class UpgradeList : MonoBehaviour
                     return 0;}, OneUse = false});
 
         list.Add(new UpgradeItem() { Description = "Gain +1 life steal",
-             Action = () => {GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().lifeSteal++;
+             Action = () => {GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().lifeSteal += 1f;
                     return 0;}, OneUse = false});
         
         list.Add(new UpgradeItem() { Description = "Your maximum mana increases by 2",
-             Action = () => {GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().MaxMana += 2;
+             Action = () => {GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().MaxMana += 2f;
                     return 0;}, OneUse = false});
 
         list.Add(new UpgradeItem() { Description = "Gain +1 wand damage",
-             Action = () => {GameObject.FindGameObjectWithTag("Player").transform.GetChild(1).gameObject.transform.GetChild(1).gameObject.GetComponent<ShootWand>().damage++;
+             Action = () => {GameObject.FindGameObjectWithTag("Player").transform.GetChild(1).gameObject.transform.GetChild(1).gameObject.GetComponent<ShootWand>().damage += 1f;
                     return 0;}, OneUse = false});
 
         list.Add(new UpgradeItem() { Description = "Gain +1 arrow damage",
-             Action = () => {GameObject.FindGameObjectWithTag("Player").transform.GetChild(1).gameObject.transform.GetChild(2).gameObject.GetComponent<ShootingController>().damage++;
+             Action = () => {GameObject.FindGameObjectWithTag("Player").transform.GetChild(1).gameObject.transform.GetChild(2).gameObject.GetComponent<ShootingController>().damage =+ 1f;
                     return 0;}, OneUse = false});
 
         list.Add(new UpgradeItem() { Description = "Your wand attack costs less mana",
-             Action = () => {GameObject.FindGameObjectWithTag("Player").transform.GetChild(1).gameObject.transform.GetChild(1).gameObject.GetComponent<ShootWand>().manaCost--;
+             Action = () => {GameObject.FindGameObjectWithTag("Player").transform.GetChild(1).gameObject.transform.GetChild(1).gameObject.GetComponent<ShootWand>().ManaCost -= 1f;
                     return 0;}, OneUse = false});
 
         list.Add(new UpgradeItem() { Description = "Your special wand attack costs less mana",
-             Action = () => {GameObject.FindGameObjectWithTag("Player").transform.GetChild(1).gameObject.transform.GetChild(1).gameObject.GetComponent<ShootWand>().specialManaCost--;
+             Action = () => {GameObject.FindGameObjectWithTag("Player").transform.GetChild(1).gameObject.transform.GetChild(1).gameObject.GetComponent<ShootWand>().SpecialManaCost -= 1f;
                     return 0;}, OneUse = false});
 
         list.Add(new UpgradeItem() { Description = "Gain more wand attack speed",
