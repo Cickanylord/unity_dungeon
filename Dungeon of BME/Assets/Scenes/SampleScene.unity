@@ -515,8 +515,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 240296358}
     - target: {fileID: 8187020142005799289, guid: 83339db99e248a4428aa37d69ffb1782, type: 3}
-      propertyPath: manaRegenRate
-      value: 0.05
+      propertyPath: lifeSteal
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8187020142005799289, guid: 83339db99e248a4428aa37d69ffb1782, type: 3}
       propertyPath: gameController
@@ -636,7 +636,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 131.54001, y: -21.899994}
+  m_AnchoredPosition: {x: 131.54004, y: -21.900024}
   m_SizeDelta: {x: 215, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &240296358

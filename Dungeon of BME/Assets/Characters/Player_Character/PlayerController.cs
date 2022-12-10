@@ -132,6 +132,8 @@ public class PlayerController : MonoBehaviour, IDamage
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         maxMana = Mana;
         maxHealth = Health;
+        healthbar.SetMaxValue(maxHealth);
+        manabar.SetMaxValue(maxMana);
         gameController = GameObject.FindGameObjectWithTag("GameController");
         DeNotifyPlayer();
     }

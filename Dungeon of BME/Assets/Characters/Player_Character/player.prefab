@@ -104,8 +104,6 @@ MonoBehaviour:
   timer: 0
   fireRate: 0.6
   damage: 0
-  manaCost: 0
-  specialManaCost: 0
   projectileSound: {fileID: 3773141352876157521}
 --- !u!82 &3773141352876157521
 AudioSource:
@@ -669,13 +667,13 @@ MonoBehaviour:
   timer: 0
   lifeSteal: 1
   maxHealth: 0
-  health: 10
+  health: 50
   healthbar: {fileID: 0}
   manabar: {fileID: 0}
-  manaRegenRate: 1
+  manaRegenRate: 0.1
   maxMana: 0
   mana: 10
-  manaIncremention: 0.01
+  manaIncremention: 0.1
 --- !u!50 &7915179407895860090
 Rigidbody2D:
   serializedVersion: 4
