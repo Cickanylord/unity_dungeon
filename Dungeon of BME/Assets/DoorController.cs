@@ -51,6 +51,7 @@ public class DoorController : MonoBehaviour
 
     public void Victory(){
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().Victory();
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().Pause = true;
         GameObject.FindGameObjectWithTag("Victory").GetComponent<UnityEngine.UI.Text>().text = "Victory!";
         GameObject.FindGameObjectWithTag("Restart").GetComponent<UnityEngine.UI.Text>().text = "Press Q to restart";
     }

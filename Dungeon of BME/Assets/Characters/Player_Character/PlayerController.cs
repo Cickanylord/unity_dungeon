@@ -232,7 +232,7 @@ public class PlayerController : MonoBehaviour, IDamage
     //Attack functions
     //plays attack animation  
     void OnFire(){
-        if(sword.activeSelf){
+        if(sword.activeSelf && !gameController.GetComponent<GameController>().Pause){
             animator.SetTrigger("swordAttack");
             sword.GetComponent<SpriteRenderer>().enabled=false;
         }
