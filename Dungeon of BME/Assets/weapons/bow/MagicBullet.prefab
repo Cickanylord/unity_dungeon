@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 4654921748875203432}
   speed: 2
-  damage: 3
+  damage: 5
   targetTag: Enemy
   knockbackForce: 500
 --- !u!50 &4654921748875203432

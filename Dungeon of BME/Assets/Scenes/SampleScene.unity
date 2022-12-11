@@ -5235,7 +5235,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 586060039611178791, guid: f14cdbfbf982a844fb8219c034968bb7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.69
+      value: -5.763
       objectReference: {fileID: 0}
     - target: {fileID: 586060039611178791, guid: f14cdbfbf982a844fb8219c034968bb7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5276,18 +5276,6 @@ PrefabInstance:
     - target: {fileID: 1524389187361114361, guid: f14cdbfbf982a844fb8219c034968bb7, type: 3}
       propertyPath: m_Name
       value: Boss
-      objectReference: {fileID: 0}
-    - target: {fileID: 4948786671876201015, guid: f14cdbfbf982a844fb8219c034968bb7, type: 3}
-      propertyPath: m_Radius
-      value: 1.5895042
-      objectReference: {fileID: 0}
-    - target: {fileID: 4948786671876201015, guid: f14cdbfbf982a844fb8219c034968bb7, type: 3}
-      propertyPath: m_Offset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4948786671876201015, guid: f14cdbfbf982a844fb8219c034968bb7, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f14cdbfbf982a844fb8219c034968bb7, type: 3}

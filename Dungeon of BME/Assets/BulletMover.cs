@@ -32,7 +32,7 @@ public class BulletMover : MonoBehaviour{
     private void OnTriggerEnter2D(Collider2D other){
         IDamage enemyObject = (IDamage) other.GetComponent<IDamage>();
         if(other.tag==targetTag){
-            print(other.tag);
+            
             //knockback
             Vector3 parentpos = gameObject.GetComponentInParent<Transform>().position;
             Vector2 direction = (Vector2) (other.gameObject.transform.position - parentpos).normalized;
@@ -47,6 +47,7 @@ public class BulletMover : MonoBehaviour{
         if(other.tag=="Wall"){
             Destroy(this.gameObject);
         }
+        print(other.tag);
         
     }
 
